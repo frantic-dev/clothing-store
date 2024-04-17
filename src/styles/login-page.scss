@@ -1,0 +1,15 @@
+#login-page {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 45%;
+    height: 100vh;
+    object-fit: cover;
+  }
+
+  & > div {
+    margin-left: calc((100vw - 45% - 445px) / 2);
+  }
+
+}

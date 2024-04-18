@@ -1,11 +1,10 @@
-import '../styles/login-form.scss'
 function LoginForm() {
   return (
     <div>
-      <h2 id='login-welcome'>Welcome👋</h2>
-      <div id='login-form-instructions'>Please login here</div>
+      <h2 className='form-title'>Welcome👋</h2>
+      <div className='form-instructions'>Please login here</div>
 
-      <form id='login-form'>
+      <form className='form' >
 
         <label htmlFor='email'>email address</label>
         <input
@@ -28,7 +27,7 @@ function LoginForm() {
           <a href=''> forgot password?</a>
         </div>
 
-        <button id='login-btn'>Login</button>
+        <button className='form-btn'>Login</button>
 
       </form>
     </div>

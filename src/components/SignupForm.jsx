@@ -10,6 +10,7 @@ function SignupForm() {
           type='text'
           name='first-name'
           id='first-name'
+          placeholder="Jane"
         />
 
         <label htmlFor='last-name'>last name</label>
@@ -17,20 +18,23 @@ function SignupForm() {
           type='password'
           name='last-name'
           id='last-name'
+          placeholder="Doe"
         />
 
-        <label htmlFor='email'>email address</label>
+        <label htmlFor='signup-email'>email address</label>
         <input
           type='text'
-          name='email'
-          id='email'
+          name='signup-email'
+          id='signup-email'
+          placeholder="example@gmail.com"
         />
 
-        <label htmlFor='password'>password</label>
+        <label htmlFor='signup-password'>password</label>
         <input
           type='password'
-          name='password'
-          id='password'
+          name='signup-password'
+          id='signup-password'
+          placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
         />
 
         <div>

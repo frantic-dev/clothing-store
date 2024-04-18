@@ -11,11 +11,12 @@ function ForgotPasswordForm() {
       <div className='form-instructions'>Enter your registered email address. We&apos;ll send you a code to reset your password. </div>
 
       <form className='form'>
-        <label htmlFor='email'>email address</label>
+        <label htmlFor='forgot-password-email'>email address</label>
         <input
           type='text'
-          name='email'
-          id='email'
+          name='forgot-password-email'
+          id='forgot-password-email'
+          placeholder='example@gmail.com'
         />
 
         <button className='form-btn'>Send OTP</button>

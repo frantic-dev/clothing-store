@@ -6,18 +6,20 @@ function LoginForm() {
 
       <form className='form' >
 
-        <label htmlFor='email'>email address</label>
+        <label htmlFor='login-email'>email address</label>
         <input
           type='text'
-          name='email'
-          id='email'
+          name='login-email'
+          id='login-email'
+          placeholder="example@gmail.com"
         />
         
-        <label htmlFor='password'>password</label>
+        <label htmlFor='login-password'>password</label>
         <input
           type='password'
-          name='password'
-          id='password'
+          name='login-password'
+          id='login-password'
+          placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
         />
 
         <div>

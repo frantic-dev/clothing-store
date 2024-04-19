@@ -1,0 +1,21 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: auto;
+  height: 80px;
+
+  a {
+    text-decoration: none;
+    margin: 0 10px;
+  }
+
+  button {
+    padding: 10px 25px;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    margin-left: 10px;
+  }
+}

@@ -5,10 +5,12 @@ import SignupImg from './assets/signup-img.jpg'
 import SignupForm from './components/SignupForm'
 import ForgotPasswordImg from './assets/forgot-password-img.jpg'
 import ForgotPasswordForm from './components/ForgotPasswordForm'
+import Navbar from './components/Navbar'
 
 function App() {
   return (
     <div>
+      <Navbar />
       <FormPage
         bg={LoginImg}
         form={<LoginForm />}

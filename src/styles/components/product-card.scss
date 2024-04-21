@@ -1,0 +1,16 @@
+.product-card {
+  div:first-child {
+    position: relative;
+  }
+  img {
+    width: 250px;
+  }
+  .description {
+    text-transform: capitalize;
+  }
+  .previous-price {
+    margin-left: 5px;
+    text-decoration: line-through;
+    color: rgb(190 163 169);
+  }
+}

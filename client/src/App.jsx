@@ -10,18 +10,13 @@ import CategoryCard from './components/CategoryCard'
 import DressImg from './assets/dress-img.jpg'
 import ProductCard from './components/ProductCard'
 import TshirtImg from './assets/tshirt-img.jpg'
-// import { useEffect } from 'react'
-import axios from 'axios'
+import Hero from './components/Hero'
 
 function App() {
-  const fetchAPI = async () => {
-    const response = await axios.get('/api/test')
-    console.log(response)
-  }
-  fetchAPI()
   return (
     <div>
       <Navbar />
+      <Hero />
       <CategoryCard
         img={DressImg}
         text='Dresses'

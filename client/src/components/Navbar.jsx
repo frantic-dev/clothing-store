@@ -1,17 +1,18 @@
 import '../styles/components/navbar.scss'
 import HeartIcon from '../assets/heart-icon.svg?react'
 import CartIcon from '../assets/cart-icon.svg?react'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
   return (
     <nav>
       <div>Logo</div>
       <div id='nav-links'>
-        <a href=''>Home</a>
-        <a href=''>Shop</a>
-        <a href=''>Our Story</a>
-        <a href=''>Blog</a>
-        <a href=''>Contact Us</a>
+        <Link to={'/'}>Home</Link>
+        <Link to={'/'}>Shop</Link>
+        <Link to={'/'}>Our Story</Link>
+        <Link to={'/'}>Blog</Link>
+        <Link to={'/'}>Contact Us</Link>
       </div>
       <div>
         <a href=''>
@@ -20,7 +21,9 @@ function Navbar() {
         <a href=''>
           <CartIcon className='icon' />
         </a>
-        <button>Login</button>
+        <Link to={'login'}>
+          <button>Login</button>
+        </Link>
       </div>
     </nav>
   )

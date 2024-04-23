@@ -5,11 +5,12 @@ nav {
   width: 90%;
   margin: auto;
   height: 80px;
+  position: relative;
 
   a {
     text-decoration: none;
   }
-  
+
   #nav-links a {
     margin: 0 10px;
   }

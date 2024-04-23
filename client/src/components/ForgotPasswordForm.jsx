@@ -1,14 +1,18 @@
+import { Link } from 'react-router-dom'
 import BackIcon from '../assets/less-than-icon.png'
 
 function ForgotPasswordForm() {
   return (
     <div>
-      <div className="form-back-btn">
+      <div className='form-back-btn'>
         <img src={BackIcon} />
-        <a href="">Back</a>
+        <Link to={'/login'}>Back</Link>
       </div>
       <h2 className='form-title'>Forgot Password</h2>
-      <div className='form-instructions'>Enter your registered email address. We&apos;ll send you a code to reset your password. </div>
+      <div className='form-instructions'>
+        Enter your registered email address. We&apos;ll send you a code to reset
+        your password.{' '}
+      </div>
 
       <form className='form'>
         <label htmlFor='forgot-password-email'>email address</label>

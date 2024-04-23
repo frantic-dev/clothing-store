@@ -5,7 +5,6 @@ import SignupImg from './assets/signup-img.jpg'
 import SignupForm from './components/SignupForm'
 import ForgotPasswordImg from './assets/forgot-password-img.jpg'
 import ForgotPasswordForm from './components/ForgotPasswordForm'
-import Navbar from './components/Navbar'
 import CategoryCard from './components/CategoryCard'
 import DressImg from './assets/dress-img.jpg'
 import ProductCard from './components/ProductCard'
@@ -15,7 +14,6 @@ import Hero from './components/Hero'
 function App() {
   return (
     <div>
-      <Navbar />
       <Hero />
       <CategoryCard
         img={DressImg}

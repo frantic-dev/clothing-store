@@ -1,30 +1,70 @@
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useState } from 'react'
+import { Link, redirect, useNavigate } from 'react-router-dom'
+
 function LoginForm() {
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: '',
+    rememberMe: false,
+  })
+  const navigate = useNavigate()
+
+  function handleChange(e) {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value })
+  }
+
+  function toggleRememberMe() {
+    setLoginData(data => ({
+      ...data,
+      rememberMe: !data.rememberMe,
+    }))
+  }
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const response = await axios.post('/api/test', loginData)
+    console.log(response.data.redirect)
+    if (response.data.redirect) {
+      redirect('/')
+    }
+  }
   return (
     <div>
       <h2 className='form-title'>Welcome👋</h2>
       <div className='form-instructions'>Please login here</div>
 
-      <form className='form'>
+      <form
+        className='form'
+        onSubmit={handleSubmit}
+      >
         <label htmlFor='login-email'>email address</label>
         <input
           type='text'
-          name='login-email'
+          name='email'
           id='login-email'
           placeholder='example@gmail.com'
+          value={loginData.email}
+          onChange={handleChange}
         />
 
         <label htmlFor='login-password'>password</label>
         <input
           type='password'
-          name='login-password'
+          name='password'
           id='login-password'
           placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;'
+          value={loginData.password}
+          onChange={handleChange}
         />
 
         <div>
           <label>
-            <input type='checkbox' /> remember me
+            <input
+              type='checkbox'
+              name='rememberMe'
+              onClick={toggleRememberMe}
+            />
+            remember me
           </label>
           <Link to={'/forgot-password'}>forgot password</Link>
         </div>

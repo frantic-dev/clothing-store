@@ -1,11 +1,17 @@
 import axios from 'axios'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { setUser } from '../reducers/userReducer'
+import {
+  displayNotification,
+  showNotification,
+} from '../reducers/notificationReducer'
+import Notification from './Notification'
 
 function LoginForm() {
   const dispatch = useDispatch()
+  const notification = useSelector(state => state.notification)
 
   const [loginData, setLoginData] = useState({
     email: '',
@@ -27,14 +33,22 @@ function LoginForm() {
   async function handleSubmit(e) {
     e.preventDefault()
     const response = await axios.post('/api/login', loginData)
-    console.log(response.data)
-    if (response.data.redirect) {
-      dispatch(setUser({username: response.data.username}))
+
+    if (response.data.loginSuccess) {
+      dispatch(setUser({ ...response.data }))
       navigate('/')
+    } else {
+      dispatch(displayNotification())
     }
   }
   return (
     <div>
+      {notification && (
+        <Notification
+          type='error'
+          content='Wrong email or password. Try again.'
+        />
+      )}
       <h2 className='form-title'>Welcome👋</h2>
       <div className='form-instructions'>Please login here</div>
 

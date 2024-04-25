@@ -15,6 +15,6 @@ def test():
             sa.select(User).where(User.email == data['email'])
         )
         if user is None or not user.check_password(data['password']):
-            return {'redirect': False, 'response': 'wrong username or password'}
-        return {'redirect': True, 'username': user.username}
+            return {'loginSuccess': False, 'response': 'wrong username or password'}
+        return {'loginSuccess': True, 'username': user.username}
 

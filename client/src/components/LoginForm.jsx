@@ -3,10 +3,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { setUser } from '../reducers/userReducer'
-import {
-  displayNotification,
-  showNotification,
-} from '../reducers/notificationReducer'
+import { displayNotification } from '../reducers/notificationReducer'
 import Notification from './Notification'
 
 function LoginForm() {
@@ -82,6 +79,7 @@ function LoginForm() {
               type='checkbox'
               name='rememberMe'
               onClick={toggleRememberMe}
+              style={{ marginRight: '5px' }}
             />
             remember me
           </label>
@@ -89,6 +87,12 @@ function LoginForm() {
         </div>
 
         <button className='form-btn'>Login</button>
+        <Link
+          to='/signup'
+          style={{ margin: 'auto', textTransform: 'none' }}
+        >
+          Don&apos;t have an account?
+        </Link>
       </form>
     </div>
   )

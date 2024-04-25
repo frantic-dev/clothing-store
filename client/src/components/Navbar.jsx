@@ -2,8 +2,16 @@ import '../styles/components/navbar.scss'
 import HeartIcon from '../assets/heart-icon.svg?react'
 import CartIcon from '../assets/cart-icon.svg?react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function Navbar() {
+  const username = useSelector(state => state.user.username)
+
+  // function displayUsername() {
+  //   if (username){
+
+  //   }
+  // }
   return (
     <nav>
       <div>Logo</div>
@@ -21,9 +29,14 @@ function Navbar() {
         <a href=''>
           <CartIcon className='icon' />
         </a>
-        <Link to={'login'}>
-          <button>Login</button>
-        </Link>
+
+        {username ? (
+          <span id='username'>{username}</span>
+        ) : (
+          <Link to={'login'}>
+            <button>Login</button>
+          </Link>
+        )}
       </div>
     </nav>
   )

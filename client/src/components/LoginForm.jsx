@@ -1,8 +1,12 @@
 import axios from 'axios'
 import { useState } from 'react'
-import { Link, redirect, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { setUser } from '../reducers/userReducer'
 
 function LoginForm() {
+  const dispatch = useDispatch()
+
   const [loginData, setLoginData] = useState({
     email: '',
     password: '',
@@ -22,10 +26,11 @@ function LoginForm() {
   }
   async function handleSubmit(e) {
     e.preventDefault()
-    const response = await axios.post('/api/test', loginData)
-    console.log(response.data.redirect)
+    const response = await axios.post('/api/login', loginData)
+    console.log(response.data)
     if (response.data.redirect) {
-      redirect('/')
+      dispatch(setUser({username: response.data.username}))
+      navigate('/')
     }
   }
   return (

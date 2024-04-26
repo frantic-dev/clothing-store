@@ -5,7 +5,7 @@ from app import app, db
 from app.models import User
 
 
-@app.route('/api/login', methods=['GET', 'POST'])
+@app.route('/api/login', methods=['GET', 'POST'])  # type: ignore
 def test():
     if request.method == 'GET':
         return {'backend': 'im working'}
@@ -16,5 +16,4 @@ def test():
         )
         if user is None or not user.check_password(data['password']):
             return {'loginSuccess': False, 'response': 'wrong username or password'}
-        return {'loginSuccess': True, 'username': user.username}
-
+        return {'loginSuccess': True, 'firstName': user.firstName, 'lastName': user.lastName}

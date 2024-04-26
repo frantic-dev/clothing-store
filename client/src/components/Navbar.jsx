@@ -5,13 +5,9 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 function Navbar() {
-  const username = useSelector(state => state.user.username)
+  const userFirstName = useSelector(state => state.user.firstName)
+  const userLastName = useSelector(state => state.user.lastName)
 
-  // function displayUsername() {
-  //   if (username){
-
-  //   }
-  // }
   return (
     <nav>
       <div>Logo</div>
@@ -30,8 +26,8 @@ function Navbar() {
           <CartIcon className='icon' />
         </a>
 
-        {username ? (
-          <span id='username'>{username}</span>
+        {userFirstName ? (
+          <span id='username'>{`${userFirstName} ${userLastName}`}</span>
         ) : (
           <Link to={'login'}>
             <button>Login</button>

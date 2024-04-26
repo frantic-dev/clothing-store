@@ -23,7 +23,7 @@ function SignupForm() {
       <div className='form-instructions'>Please enter details</div>
 
       <form className='form'>
-        <label htmlFor='first-name'>email address</label>
+        <label htmlFor='first-name'>first name</label>
         <input
           type='text'
           name='firstName'

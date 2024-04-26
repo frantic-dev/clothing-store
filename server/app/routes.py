@@ -6,7 +6,7 @@ from app.models import User
 
 
 @app.route('/api/login', methods=['GET', 'POST'])  # type: ignore
-def test():
+def login():
     if request.method == 'GET':
         return {'backend': 'im working'}
     if request.method == 'POST':
@@ -17,3 +17,20 @@ def test():
         if user is None or not user.check_password(data['password']):
             return {'loginSuccess': False, 'response': 'wrong username or password'}
         return {'loginSuccess': True, 'firstName': user.firstName, 'lastName': user.lastName}
+
+
+@app.route('/api/signup', methods=['GET', 'POST'])  # type: ignore
+def signup():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        user = db.session.scalar(
+            sa.select(User).where(User.email == data['email'])
+        )
+        if user is None:
+            new_user = User(firstName=data['firstName'], lastName=data['lastName'], email=data['email'])  # type: ignore
+            new_user.set_password(data['password'])
+            db.session.add(new_user)
+            db.session.commit()
+            return {'loginSuccess': True, 'firstName': data['firstName'], 'lastName': data['lastName']}
+        return {'signupSuccess': False, 'response': 'an account already exists with that email'}

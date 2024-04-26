@@ -1,6 +1,17 @@
+import axios from 'axios'
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import Notification from './Notification'
+import { displayNotification } from '../reducers/notificationReducer'
+import { setUser } from '../reducers/userReducer'
+import { useNavigate } from 'react-router-dom'
 
 function SignupForm() {
+  const notification = useSelector(state => state.notification)
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const [signupData, setSignupData] = useState({
     firstName: '',
     lastName: '',
@@ -17,12 +28,34 @@ function SignupForm() {
     setSignupData(data => ({ ...data, agreeToTerms: !data.agreeToTerms }))
   }
 
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const response = await axios.post('/api/signup', signupData)
+    if (response.data.loginSuccess) {
+      dispatch(setUser({ ...response.data }))
+      navigate('/')
+      console.log('sign in successfully')
+    } else {
+      console.log('failed sign up')
+      dispatch(displayNotification())
+    }
+  }
+
   return (
     <div>
+      {notification && (
+        <Notification
+          type='error'
+          content='an account already exists with that email'
+        />
+      )}
       <h2 className='form-title'>create new account</h2>
       <div className='form-instructions'>Please enter details</div>
 
-      <form className='form'>
+      <form
+        className='form'
+        onSubmit={handleSubmit}
+      >
         <label htmlFor='first-name'>first name</label>
         <input
           type='text'

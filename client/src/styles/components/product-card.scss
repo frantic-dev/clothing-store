@@ -2,10 +2,16 @@
   width: min-content;
   div:first-child {
     position: relative;
-    width: min-content;
+    width: 250px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   img {
-    width: 250px;
+    width: 200px;
+    height: 250px;
+    object-fit: contain;
   }
   .description {
     text-transform: capitalize;
@@ -25,10 +31,14 @@
     justify-content: center;
     height: 42px;
     aspect-ratio: 1;
+    background-color: #f1f1f18a;
 
     svg {
       height: 50px;
     }
+  }
+  .white-btn {
+    box-shadow: 0 0 15px rgba(128, 128, 128, 0.559);
   }
 
 }

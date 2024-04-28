@@ -27,4 +27,13 @@ body {
     justify-content: space-between;
     margin: 0 auto 70px;
   }
+
+  #best-seller-section {
+    #products-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+  }
 }

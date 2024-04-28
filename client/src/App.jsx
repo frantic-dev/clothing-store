@@ -14,6 +14,7 @@ import WomanImg from './assets/woman-img.jpg'
 import ManImg from './assets/man-img.jpg'
 import HeadphonesImg from './assets/headphones-img.jpg'
 import JewelryImg from './assets/jewelry-img.jpg'
+import BestSeller from './modules/BestSeller'
 
 function App() {
   return (
@@ -24,11 +25,11 @@ function App() {
         <div id='category-cards'>
           <CategoryCard
             img={WomanImg}
-            text='Women&apos;s clothing'
+            text="Women's clothing"
           />
           <CategoryCard
             img={ManImg}
-            text='Men&apos;s clothing'
+            text="Men's clothing"
           />
           <CategoryCard
             img={JewelryImg}
@@ -39,13 +40,7 @@ function App() {
             text='Electronics'
           />
         </div>
-        <ProductCard
-          img={TshirtImg}
-          title='Yahwen'
-          description='korean t-shirt'
-          price='38$'
-          previousPrice='43$'
-        />
+        <BestSeller />
       </div>
     </div>
   )

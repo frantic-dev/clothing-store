@@ -1,15 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
 }
-body{
+body {
   font-family: 'jost', sans-serif;
   button {
     font-family: 'jost', sans-serif;
     height: 45px;
+  }
+  .inner-container {
+    width: 60vw;
+    margin: auto;
+  }
+
+}
+#home-page{
+  h2 {
+    margin: 40px 0;
+  }
+  
+  #category-cards {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 70px;
   }
 }

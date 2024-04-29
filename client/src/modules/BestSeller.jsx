@@ -3,18 +3,16 @@ import { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
 
 function BestSeller() {
-  const [productsData, setProductsData] = useState({})
+  const [productsData, setProductsData] = useState([])
 
   async function getBestSellerProducts() {
-    const products = await axios.get(
-      'https://fakestoreapi.com/products?limit=8'
-    )
+    const products = await axios.get('/api/products?limit=8')
     setProductsData(products.data)
   }
 
   useEffect(() => {
     getBestSellerProducts()
-  })
+  }, [])
 
   const productsCards = productsData.map(product => (
     <ProductCard

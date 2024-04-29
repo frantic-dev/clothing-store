@@ -1,7 +1,7 @@
 from flask import request
 from flask_login import current_user
 import sqlalchemy as sa
-from app import app, db
+from app import app, db, products
 from app.models import User
 
 
@@ -23,7 +23,6 @@ def login():
 def signup():
     if request.method == 'POST':
         data = request.get_json()
-        print(data)
         user = db.session.scalar(
             sa.select(User).where(User.email == data['email'])
         )
@@ -34,3 +33,10 @@ def signup():
             db.session.commit()
             return {'loginSuccess': True, 'firstName': data['firstName'], 'lastName': data['lastName']}
         return {'signupSuccess': False, 'response': 'an account already exists with that email'}
+
+@app.route('/api/products')
+def getProducts():
+    limit = request.args.get('limit')
+    if limit :
+        return products.data[:int(limit)]
+    return products.data

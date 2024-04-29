@@ -15,6 +15,7 @@ import ManImg from './assets/man-img.jpg'
 import HeadphonesImg from './assets/headphones-img.jpg'
 import JewelryImg from './assets/jewelry-img.jpg'
 import BestSeller from './modules/BestSeller'
+import Reviews from './modules/Reviews'
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           />
         </div>
         <BestSeller />
+        <Reviews />
       </div>
     </div>
   )

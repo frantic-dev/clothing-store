@@ -25,7 +25,7 @@ function ProductCard(props) {
       <h3>{props.title}</h3>
       {/* <div className='description'>{props.description}</div> */}
       <div>
-        {props.price}
+        {props.price} $
         {/* <span className='previous-price'>{props.previousPrice}</span> */}
       </div>
     </div>

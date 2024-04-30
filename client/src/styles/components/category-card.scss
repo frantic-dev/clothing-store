@@ -3,8 +3,11 @@
   width: fit-content;
   height: min-content;
   img {
-    width: 250px;
-    height: 375px;
+    width: 13vw;
+    aspect-ratio: 9/14;
     object-fit: cover;
+  }
+  .white-btn {
+    left: calc((13vw - 190px) / 2);
   }
 }

@@ -1,20 +1,22 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import ProductCard from '../components/ProductCard'
+import { useDispatch, useSelector } from 'react-redux'
+import { initializeProducts } from '../reducers/productsReducer'
 
 function BestSeller() {
-  const [productsData, setProductsData] = useState([])
-
-  async function getBestSellerProducts() {
-    const products = await axios.get('/api/products?limit=8')
-    setProductsData(products.data)
-  }
+  const productsData = useSelector(state => state.products)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    getBestSellerProducts()
+    dispatch(initializeProducts())
   }, [])
 
-  const productsCards = productsData.map(product => (
+  function getLimitedProducts(products) {
+    const shuffledProducts = [...products].sort(() => Math.random() - 0.5)
+    return shuffledProducts.slice(0,8)
+  }
+  
+  const productsCards = getLimitedProducts(productsData).map(product => (
     <ProductCard
       key={product.id}
       img={product.image}

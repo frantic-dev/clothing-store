@@ -1,0 +1,31 @@
+#shop-page {
+  display: flex;
+  justify-content: center;
+
+  #filters {
+    width: 15vw;
+
+    & .filter > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h3 {
+      margin: 10px 0;
+    }
+
+    label::after {
+      content: '\a';
+      white-space: pre;
+    }
+    input[type='checkbox'] {
+      margin-right: 5px;
+    }
+  }
+  #products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 10vw;
+  }
+}

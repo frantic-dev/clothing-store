@@ -8,6 +8,7 @@ import SignupForm from './components/SignupForm'
 import Root from './pages/Root.jsx'
 import App from './App.jsx'
 import { createBrowserRouter } from 'react-router-dom'
+import ShopPage from './pages/ShopPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <App />,
+      },
+      {
+        path: 'shop',
+        element: <ShopPage />,
       },
     ],
   },

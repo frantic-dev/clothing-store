@@ -13,7 +13,7 @@ function Navbar() {
       <div>Logo</div>
       <div id='nav-links'>
         <Link to={'/'}>Home</Link>
-        <Link to={'/'}>Shop</Link>
+        <Link to={'/shop'}>Shop</Link>
         <Link to={'/'}>Our Story</Link>
         <Link to={'/'}>Blog</Link>
         <Link to={'/'}>Contact Us</Link>

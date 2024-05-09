@@ -2,9 +2,9 @@ import StarIcon from '../assets/star-icon.png'
 import UserIcon from '../assets/user-icon.png'
 import '../styles/components/review-card.scss'
 function ReviewCard() {
-  const fiveStars = Array.from({ length: 5 }).map(index => (
+  const fiveStars = Array.from({ length: 5 }).map((e, index) => (
     <img
-      key={index}
+      key={`star-${index}`}
       src={StarIcon}
     />
   ))
@@ -16,7 +16,7 @@ function ReviewCard() {
         porttitor pellentesque. Nulla facilisi. Proin tempus nisl pellentesque
         odio porta, ut scelerisque arcu pellentesque.
       </p>
-      <div className="profile">
+      <div className='profile'>
         <img src={UserIcon} />
         <h4>John Doe</h4>
       </div>

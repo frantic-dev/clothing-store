@@ -1,8 +1,8 @@
 import ReviewCard from '../components/ReviewCard'
 
 function Reviews() {
-  const reviews = Array.from({ length: 3 }).map(index => (
-    <ReviewCard key={index} />
+  const reviews = Array.from({ length: 3 }).map((e, index) => (
+    <ReviewCard key={`review-${index}`} />
   ))
   return (
     <div className='grey-bg'>

@@ -3,7 +3,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   width: 60vw;
-  margin: 0 auto;
+  margin: 20px auto;
 
   #shop-nav { 
     width: 100%;
@@ -40,4 +40,21 @@
     grid-template-columns: repeat(3, 1fr);
     width: 40vw;
   }
+  #page-numbers {
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    .page-number {
+      aspect-ratio: 1;
+      font-size: 19px;
+      background-color: white;
+      border-radius: 15% ;
+      margin: 0 3px;
+    }
+    .checked {
+      background-color: black;
+      color: white;
+    }
+  }
+
 }

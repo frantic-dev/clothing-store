@@ -11,6 +11,7 @@ export default function Root() {
   useEffect(() => {
     dispatch(initializeProducts())
   }, [])
+  
   return (
     <>
       <Navbar />

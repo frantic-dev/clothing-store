@@ -3,17 +3,18 @@ import DownArrow from '../assets/down-arrow-icon.svg?react'
 import { useDispatch } from 'react-redux'
 import { addFilter, removeFilter } from '../reducers/filtersReducer'
 
-function CategoryFilter() {
+function CategoryFilter(props) {
   const dispatch = useDispatch()
   const [filters, setFilters] = useState({
     men: false,
     women: false,
-    jewelry: false,
+    jewelery: false,
     electronics: false,
   })
 
   function handleClick(e) {
     const filterName = e.target.name
+    props.setCurrentPage(1)
     setFilters({ ...filters, [filterName]: !filters[filterName] })
     if (filters[filterName]) {
       dispatch(removeFilter(filterName))
@@ -35,28 +36,32 @@ function CategoryFilter() {
         type='checkbox'
         name='men'
         id='men'
-        onClick={handleClick}
+        onChange={handleClick}
+        checked={filters.men}
       />
       <label htmlFor='men'>Men</label>
       <input
         type='checkbox'
         name='women'
         id='women'
-        onClick={handleClick}
+        onChange={handleClick}
+        checked={filters.women}
       />
       <label htmlFor='women'>Women</label>
       <input
         type='checkbox'
         name='jewelery'
         id='jewelry'
-        onClick={handleClick}
+        onChange={handleClick}
+        checked={filters.jewelery}
       />
       <label htmlFor='jewelry'>Jewelry</label>
       <input
         type='checkbox'
         name='electronics'
         id='electronics'
-        onClick={handleClick}
+        onChange={handleClick}
+        checked={filters.electronics}
       />
       <label htmlFor='electronics'>Electronics</label>
     </div>

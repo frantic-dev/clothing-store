@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux'
 import ProductCard from '../components/ProductCard'
 import { Link } from 'react-router-dom'
 import DownArrowIcon from '../assets/down-arrow-icon.svg?react'
-// import { useState } from 'react'
 
 function ShopPage() {
   const productsData = useSelector(state => state.products)

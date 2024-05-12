@@ -15,7 +15,7 @@ function ShopPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const productsPerPage = 9
 
-  // reset filters every time you leave page and come back  
+  // reset filters every time you leave page and come back
   useEffect(() => {
     dispatch(resetFilters())
   }, [])
@@ -27,13 +27,13 @@ function ShopPage() {
     return products.slice(firstProductIndex, lastProductIndex)
   }
 
-  function filterProducts(products, filters) {
+  function filterProducts(products, filters, maxPrice) {
     if (filters.length > 0) {
-      return products.filter(product => filters.includes(product.category))
-    } else return products
+      return products.filter(product => filters.includes(product.category) && product.price <= maxPrice)
+    } else return products.filter(product => product.price <= maxPrice)
   }
-  
-  const filteredProducts = filterProducts(productsData, filters)
+
+  const filteredProducts = filterProducts(productsData, filters.categories, filters.maxPrice)
   const productsToDisplay = displayPageProducts(
     filteredProducts,
     currentPage,

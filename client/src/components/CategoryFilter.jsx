@@ -14,6 +14,7 @@ function CategoryFilter(props) {
 
   function handleClick(e) {
     const filterName = e.target.name
+    // go back to first page whenever clicking a filter category
     props.setCurrentPage(1)
     setFilters({ ...filters, [filterName]: !filters[filterName] })
     if (filters[filterName]) {

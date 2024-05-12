@@ -1,17 +1,24 @@
 import CategoryFilter from '../components/CategoryFilter'
 import PriceFilter from '../components/PriceFilter'
 import '../styles/pages/shop-page.scss'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ProductCard from '../components/ProductCard'
 import { Link } from 'react-router-dom'
 import DownArrowIcon from '../assets/down-arrow-icon.svg?react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { resetFilters } from '../reducers/filtersReducer'
 
 function ShopPage() {
+  const dispatch = useDispatch()
   const productsData = useSelector(state => state.products)
   const filters = useSelector(state => state.filter)
   const [currentPage, setCurrentPage] = useState(1)
   const productsPerPage = 9
+
+  // reset filters every time you leave page and come back  
+  useEffect(() => {
+    dispatch(resetFilters())
+  }, [])
 
   function displayPageProducts(products, currentPage, productsPerPage) {
     const lastProductIndex = currentPage * productsPerPage
@@ -25,6 +32,7 @@ function ShopPage() {
       return products.filter(product => filters.includes(product.category))
     } else return products
   }
+  
   const filteredProducts = filterProducts(productsData, filters)
   const productsToDisplay = displayPageProducts(
     filteredProducts,

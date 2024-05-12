@@ -87,7 +87,7 @@ function ShopPage() {
       </div>
       <div id='filters'>
         <CategoryFilter setCurrentPage={setCurrentPage} />
-        <PriceFilter />
+        <PriceFilter setCurrentPage={setCurrentPage} />
       </div>
       <div id='products'>{productsCards}</div>
       <div id='page-numbers'>{displayPageNumbers}</div>

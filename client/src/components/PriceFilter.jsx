@@ -2,12 +2,21 @@ import DownArrow from '../assets/down-arrow-icon.svg?react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setMaxPrice } from '../reducers/filtersReducer'
 
-function PriceFilter() {
+function PriceFilter(props) {
   const maxPrice = useSelector(state => state.filter.maxPrice)
   const dispatch = useDispatch()
-  
+
+  function handleChange(e) {
+    // return to first shop page 
+    props.setCurrentPage(1)
+    dispatch(setMaxPrice(e.target.value))
+  }
+
   return (
-    <div id='price-filter' className='filter'>
+    <div
+      id='price-filter'
+      className='filter'
+    >
       <div>
         <h3>Filter by Price</h3>
         <DownArrow />
@@ -22,7 +31,7 @@ function PriceFilter() {
         max={1200}
         step={10}
         value={maxPrice}
-        onChange={e => dispatch(setMaxPrice(e.target.value))}
+        onChange={e => handleChange(e)}
       />
     </div>
   )

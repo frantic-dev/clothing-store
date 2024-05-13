@@ -5,7 +5,7 @@
   width: 60vw;
   margin: 20px auto;
 
-  #shop-nav { 
+  #shop-nav {
     width: 100%;
     display: flex;
     #right-arrow-icon {
@@ -17,10 +17,23 @@
   #filters {
     width: 15vw;
 
-    & .filter > div {
+    .filter > div:not(#category-filters, #price-filter) {
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    svg {
+      transition: transform 300ms;
+    }
+
+    .flip-arrow-up {
+      transform: rotate(180deg);
+    }
+
+    .hide {
+      max-height: 0;
+      overflow: hidden;
     }
 
     h3 {
@@ -48,7 +61,7 @@
       aspect-ratio: 1;
       font-size: 19px;
       background-color: white;
-      border-radius: 15% ;
+      border-radius: 15%;
       margin: 0 3px;
     }
     .checked {
@@ -56,5 +69,4 @@
       color: white;
     }
   }
-
 }

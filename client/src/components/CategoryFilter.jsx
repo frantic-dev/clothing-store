@@ -5,6 +5,7 @@ import { addFilter, removeFilter } from '../reducers/filtersReducer'
 
 function CategoryFilter(props) {
   const dispatch = useDispatch()
+  const [hide, setHide] = useState(false)
   const [filters, setFilters] = useState({
     men: false,
     women: false,
@@ -29,42 +30,44 @@ function CategoryFilter(props) {
       id='category-filter'
       className='filter'
     >
-      <div>
+      <div onClick={() => setHide(!hide)}>
         <h3>Product Categories</h3>
-        <DownArrow />
+        <DownArrow className={hide && 'flip-arrow-up'} />
       </div>
-      <input
-        type='checkbox'
-        name='men'
-        id='men'
-        onChange={handleClick}
-        checked={filters.men}
-      />
-      <label htmlFor='men'>Men</label>
-      <input
-        type='checkbox'
-        name='women'
-        id='women'
-        onChange={handleClick}
-        checked={filters.women}
-      />
-      <label htmlFor='women'>Women</label>
-      <input
-        type='checkbox'
-        name='jewelery'
-        id='jewelry'
-        onChange={handleClick}
-        checked={filters.jewelery}
-      />
-      <label htmlFor='jewelry'>Jewelry</label>
-      <input
-        type='checkbox'
-        name='electronics'
-        id='electronics'
-        onChange={handleClick}
-        checked={filters.electronics}
-      />
-      <label htmlFor='electronics'>Electronics</label>
+      <div id='category-filters' className={hide && 'hide'}>
+        <input
+          type='checkbox'
+          name='men'
+          id='men'
+          onChange={handleClick}
+          checked={filters.men}
+        />
+        <label htmlFor='men'>Men</label>
+        <input
+          type='checkbox'
+          name='women'
+          id='women'
+          onChange={handleClick}
+          checked={filters.women}
+        />
+        <label htmlFor='women'>Women</label>
+        <input
+          type='checkbox'
+          name='jewelery'
+          id='jewelry'
+          onChange={handleClick}
+          checked={filters.jewelery}
+        />
+        <label htmlFor='jewelry'>Jewelry</label>
+        <input
+          type='checkbox'
+          name='electronics'
+          id='electronics'
+          onChange={handleClick}
+          checked={filters.electronics}
+        />
+        <label htmlFor='electronics'>Electronics</label>
+      </div>
     </div>
   )
 }

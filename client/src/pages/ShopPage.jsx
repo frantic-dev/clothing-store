@@ -29,11 +29,18 @@ function ShopPage() {
 
   function filterProducts(products, filters, maxPrice) {
     if (filters.length > 0) {
-      return products.filter(product => filters.includes(product.category) && product.price <= maxPrice)
+      return products.filter(
+        product =>
+          filters.includes(product.category) && product.price <= maxPrice
+      )
     } else return products.filter(product => product.price <= maxPrice)
   }
 
-  const filteredProducts = filterProducts(productsData, filters.categories, filters.maxPrice)
+  const filteredProducts = filterProducts(
+    productsData,
+    filters.categories,
+    filters.maxPrice
+  )
   const productsToDisplay = displayPageProducts(
     filteredProducts,
     currentPage,
@@ -73,6 +80,7 @@ function ShopPage() {
   const productsCards = productsToDisplay.map(product => (
     <ProductCard
       key={`product-${product.id}`}
+      id={product.id}
       img={product.image}
       title={product.title}
       price={product.price}

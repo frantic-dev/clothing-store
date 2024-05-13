@@ -27,16 +27,25 @@ def signup():
             sa.select(User).where(User.email == data['email'])
         )
         if user is None:
-            new_user = User(firstName=data['firstName'], lastName=data['lastName'], email=data['email'])  # type: ignore
+            # type: ignore
+            new_user = User(
+                firstName=data['firstName'], lastName=data['lastName'], email=data['email'])
             new_user.set_password(data['password'])
             db.session.add(new_user)
             db.session.commit()
             return {'loginSuccess': True, 'firstName': data['firstName'], 'lastName': data['lastName']}
         return {'signupSuccess': False, 'response': 'an account already exists with that email'}
 
+
 @app.route('/api/products')
 def getProducts():
     limit = request.args.get('limit')
-    if limit :
+    if limit:
         return products.data[:int(limit)]
     return products.data
+
+
+@app.route('/api/products/<product_id>')
+def getProduct(product_id):
+    return next(
+        (product for product in products.data if product['id'] == int(product_id)), 'yepi')

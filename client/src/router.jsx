@@ -31,10 +31,6 @@ const router = createBrowserRouter([
       {
         element: <ProductPage />,
         path: '/shop/:productId',
-        loader: ({ params }) => {
-          console.log(`product id is ${params.productId}`)
-          return null
-        },
       },
     ],
   },

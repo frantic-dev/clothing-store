@@ -9,6 +9,7 @@ import Root from './pages/Root.jsx'
 import App from './App.jsx'
 import { createBrowserRouter } from 'react-router-dom'
 import ShopPage from './pages/ShopPage.jsx'
+import ProductPage from './pages/ProductPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,18 @@ const router = createBrowserRouter([
       {
         path: 'shop',
         element: <ShopPage />,
+      },
+      {
+        path: 'shop',
+        element: <ShopPage />,
+      },
+      {
+        element: <ProductPage />,
+        path: '/shop/:productId',
+        loader: ({ params }) => {
+          console.log(`product id is ${params.productId}`)
+          return null
+        },
       },
     ],
   },

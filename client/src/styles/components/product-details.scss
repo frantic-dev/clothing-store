@@ -1,0 +1,14 @@
+#product-details {
+  #stars-rating {
+    display: flex;
+    height: 20px;
+
+    .checked {
+      fill: rgb(255, 140, 0);
+    }
+
+    .star:not(.checked) {
+      fill: white;
+    }
+  }
+}

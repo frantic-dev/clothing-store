@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ProductDetails from '../modules/ProductDetails'
+import DownArrowIcon from '../assets/down-arrow-icon.svg?react'
+import '../styles/pages/product-page.scss'
 
 function ProductPage() {
   const { productId } = useParams()
@@ -18,7 +20,14 @@ function ProductPage() {
 
   if (Object.keys(product).length > 0) {
     return (
-      <div>
+      <div id='product-page'>
+        <div id='product-nav'>
+        <Link to={'/'}>Home </Link>
+        <DownArrowIcon id='right-arrow-icon' />
+        <Link to={'/shop'}>Shop </Link>
+        <DownArrowIcon id='right-arrow-icon' />
+        {product.title}
+      </div>
         <ProductDetails product={product} />
       </div>
     )

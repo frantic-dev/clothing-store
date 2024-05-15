@@ -1,7 +1,24 @@
 #product-details {
+  display: flex;
+  justify-content: space-between;
+  width: 60vw;
+  margin: auto;
+  img {
+    width: 20vw;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+  & > div {
+    width: 30vw;
+  }
+  #rating{
+    display: flex;
+    margin: 10px 0;
+  }
   #stars-rating {
     display: flex;
     height: 20px;
+    margin-right: 5px;
 
     .checked {
       fill: rgb(255, 140, 0);
@@ -10,5 +27,8 @@
     .star:not(.checked) {
       fill: white;
     }
+  }
+  #price {
+    margin-bottom: 10px;
   }
 }

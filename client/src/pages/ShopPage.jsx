@@ -89,9 +89,9 @@ function ShopPage() {
   return (
     <div id='shop-page'>
       <div id='shop-nav'>
-        <Link to={'/shop'}>Shop </Link>
+        <Link to={'/'}>Home </Link>
         <DownArrowIcon id='right-arrow-icon' />
-        All Products
+        Shop
       </div>
       <div id='filters'>
         <CategoryFilter setCurrentPage={setCurrentPage} />

@@ -12,10 +12,7 @@ function BestSeller() {
   const productsCards = getLimitedProducts(productsData).map(product => (
     <ProductCard
       key={product.id}
-      id={product.id}
-      img={product.image}
-      title={product.title}
-      price={product.price}
+      product={product}
     />
   ))
 

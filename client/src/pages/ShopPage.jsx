@@ -80,10 +80,7 @@ function ShopPage() {
   const productsCards = productsToDisplay.map(product => (
     <ProductCard
       key={`product-${product.id}`}
-      id={product.id}
-      img={product.image}
-      title={product.title}
-      price={product.price}
+      product={product}
     />
   ))
   return (

@@ -16,10 +16,7 @@ function RelatedProducts(props) {
   const displayProducts = relatedProducts.map((product, index) => (
     <ProductCard
       key={`related-product-${index}`}
-      id={product.id}
-      title={product.title}
-      img={product.image}
-      price={product.price}
+      product={product}
     />
   ))
   return (

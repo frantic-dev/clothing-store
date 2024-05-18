@@ -32,9 +32,12 @@ function CategoryFilter(props) {
     >
       <div onClick={() => setHide(!hide)}>
         <h3>Product Categories</h3>
-        <DownArrow className={hide && 'flip-arrow-up'} />
+        <DownArrow className={hide ? 'flip-arrow-up' : undefined} />
       </div>
-      <div id='category-filters' className={hide && 'hide'}>
+      <div
+        id='category-filters'
+        className={hide ? 'hide' : undefined}
+      >
         <input
           type='checkbox'
           name='men'

@@ -9,4 +9,10 @@
       scale: 0.7;
     }
   }
+  #related-products {
+    #products {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }

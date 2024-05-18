@@ -18,11 +18,11 @@ function PriceFilter(props) {
     <div className='filter'>
       <div onClick={() => setHide(!hide)}>
         <h3>Filter by Price</h3>
-        <DownArrow className={hide && 'flip-arrow-up'} />
+        <DownArrow className={hide ? 'flip-arrow-up' : undefined} />
       </div>
       <div
         id='price-filter'
-        className={hide && 'hide'}
+        className={hide ? 'hide' : undefined}
       >
         <div>Price: $0 - ${maxPrice}</div>
         <br />

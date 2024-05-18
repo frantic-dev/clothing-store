@@ -16,7 +16,9 @@ function ProductPage() {
   }
   useEffect(() => {
     getProductData()
-  }, [])
+    window.scrollTo(0, 0)
+
+  }, [productId])
 
   if (Object.keys(product).length > 0) {
     return (

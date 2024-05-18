@@ -7,11 +7,16 @@ function RelatedProducts(props) {
     product => product.id === props.product.id
   )
 
-  const relatedProducts = products.slice(productIndex + 1, productIndex + 5)
+  let relatedProducts = products.slice(productIndex + 1, productIndex + 5)
+
+  if (relatedProducts.length < 4) {
+    relatedProducts = products.slice(productIndex - 4, productIndex)
+  }
 
   const displayProducts = relatedProducts.map((product, index) => (
     <ProductCard
       key={`related-product-${index}`}
+      id={product.id}
       title={product.title}
       img={product.image}
       price={product.price}

@@ -1,5 +1,5 @@
 import '../styles/components/navbar.scss'
-import HeartIcon from '../assets/heart-icon.svg?react'
+import HeartIcon from '../assets/transparent-heart-icon.png'
 import CartIcon from '../assets/cart-icon.svg?react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -20,7 +20,7 @@ function Navbar() {
       </div>
       <div>
         <a href=''>
-          <HeartIcon className='icon' />
+          <img src={HeartIcon} className='icon' id='wishlist-icon' />
         </a>
         <a href=''>
           <CartIcon className='icon' />

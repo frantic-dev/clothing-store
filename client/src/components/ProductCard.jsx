@@ -1,21 +1,20 @@
 import WhiteButton from './WhiteButton'
 import '../styles/components/product-card.scss'
-import HeartIcon from '../assets/heart-icon.svg?react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import storageServices from '../localStorage.js'
+import TransparentHeartIcon from '../assets/transparent-heart-icon.png'
+import RedHeartIcon from '../assets/red-heart-icon.png'
 
 function ProductCard(props) {
-  const [showElements, setShowElements] = useState(true)
+  const [showElements, setShowElements] = useState(false)
+  const [wishlist, setWishlist] = useState([])
 
   function preventReferral(e) {
-    const element = e.target.tagName
-    if (element === 'svg' || element === 'BUTTON') {
+    const element = e.target.className
+    if (element === 'heart-icon' || element === 'white-btn') {
       e.preventDefault()
     }
-  }
-  function handleClick() {
-    storageServices.addToWishlist(props.product)
+    // console.log(element)
   }
 
   return (
@@ -31,12 +30,19 @@ function ProductCard(props) {
           <img src={props.product.image} />
           {showElements && <WhiteButton text='Add to Cart' />}
           {showElements && (
-            <div
-              className='heart-icon'
-              onClick={handleClick}
-            >
-              <HeartIcon />
-            </div>
+            <>
+              {wishlist.some(product => product.id === props.product.id) ? (
+                <img
+                  src={RedHeartIcon}
+                  className='heart-icon'
+                />
+              ) : (
+                <img
+                  src={TransparentHeartIcon}
+                  className='heart-icon'
+                />
+              )}
+            </>
           )}
         </div>
         <h3>{props.product.title}</h3>

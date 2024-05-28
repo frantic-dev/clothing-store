@@ -3,12 +3,14 @@ import userReducer from './reducers/userReducer'
 import notificationReducer from './reducers/notificationReducer'
 import productsReducer from './reducers/productsReducer'
 import filtersReducer from './reducers/filtersReducer'
+import pendingActionReducer from './reducers/pendingActionReducer'
 
 export default configureStore({
   reducer: {
     user: userReducer,
     notification: notificationReducer,
     products: productsReducer,
-    filter: filtersReducer
+    filter: filtersReducer,
+    pendingAction: pendingActionReducer,
   },
 })

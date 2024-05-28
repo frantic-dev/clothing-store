@@ -1,4 +1,5 @@
 from typing import Optional
+from jinja2 import Undefined
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from app import db
@@ -16,6 +17,8 @@ class User(UserMixin, db.Model):
     email: so.Mapped[str] = so.mapped_column(
         sa.String(120), index=True, unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
+    wishlist: so.Mapped[str] = so.mapped_column(
+        sa.String(256), index=True, default='', nullable=True)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

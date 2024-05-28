@@ -1,20 +1,36 @@
 import WhiteButton from './WhiteButton'
 import '../styles/components/product-card.scss'
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import TransparentHeartIcon from '../assets/transparent-heart-icon.png'
 import RedHeartIcon from '../assets/red-heart-icon.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPendingAction } from '../reducers/pendingActionReducer'
 
 function ProductCard(props) {
   const [showElements, setShowElements] = useState(false)
+  const userData = useSelector(state => state.user)
   const [wishlist, setWishlist] = useState([])
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   function preventReferral(e) {
     const element = e.target.className
     if (element === 'heart-icon' || element === 'white-btn') {
       e.preventDefault()
     }
-    // console.log(element)
+  }
+
+  function addToWishlist() {
+    if (Object.keys(userData).length === 0) {
+      navigate('/login')
+      dispatch(
+        setPendingAction({
+          action: 'addToWishlist',
+          product_id: props.product.id,
+        })
+      )
+    }
   }
 
   return (
@@ -40,6 +56,7 @@ function ProductCard(props) {
                 <img
                   src={TransparentHeartIcon}
                   className='heart-icon'
+                  onClick={addToWishlist}
                 />
               )}
             </>

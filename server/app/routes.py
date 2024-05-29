@@ -5,6 +5,12 @@ from app import app, db, products
 from app.models import User
 
 
+@app.route('/api/clear-session')
+def clear_session():
+    session.pop('current_user', None)
+    return 'session cleared'
+
+
 @app.route('/api/login', methods=['GET', 'POST'])  # type: ignore
 def login():
     if request.method == 'GET':
@@ -56,15 +62,19 @@ def getProduct(product_id):
 
 @app.route('/api/wishlist', methods=['GET', 'POST'])  # type: ignore
 def wishlist():
+    current_user = session.get('current_user')
     if request.method == 'POST':
         data = request.get_json()
         product_id = str(data['product_id'])
-        current_user = session.get('current_user')
         user = db.session.scalar(
             sa.select(User).where(User.email == current_user['email'])
         )
         user.wishlist = user.wishlist + ',' +  \
             product_id if user.wishlist else product_id
         db.session.commit()
-        return data
-        # return data
+        return user.wishlist
+    if request.method == 'GET' and not current_user == None:
+        user = db.session.scalar(
+            sa.select(User).where(User.email == current_user['email'])
+        )
+        return user.wishlist

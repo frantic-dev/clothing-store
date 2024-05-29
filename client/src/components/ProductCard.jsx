@@ -10,7 +10,7 @@ import { setPendingAction } from '../reducers/pendingActionReducer'
 function ProductCard(props) {
   const [showElements, setShowElements] = useState(false)
   const userData = useSelector(state => state.user)
-  const [wishlist, setWishlist] = useState([])
+  const wishlist = useSelector(state => state.wishlist)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -27,7 +27,7 @@ function ProductCard(props) {
     }
     dispatch(
       setPendingAction({
-        action: 'addToWishlist',
+        name: 'addToWishlist',
         product_id: props.product.id,
       })
     )
@@ -47,7 +47,7 @@ function ProductCard(props) {
           {showElements && <WhiteButton text='Add to Cart' />}
           {showElements && (
             <>
-              {wishlist.some(product => product.id === props.product.id) ? (
+              {wishlist.some(id => id === String(props.product.id)) ? (
                 <img
                   src={RedHeartIcon}
                   className='heart-icon'

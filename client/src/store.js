@@ -4,6 +4,7 @@ import notificationReducer from './reducers/notificationReducer'
 import productsReducer from './reducers/productsReducer'
 import filtersReducer from './reducers/filtersReducer'
 import pendingActionReducer from './reducers/pendingActionReducer'
+import wishlistReducer from './reducers/wishlistReducer'
 
 export default configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
     products: productsReducer,
     filter: filtersReducer,
     pendingAction: pendingActionReducer,
+    wishlist: wishlistReducer,
   },
 })

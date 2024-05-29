@@ -24,13 +24,13 @@ function ProductCard(props) {
   function addToWishlist() {
     if (Object.keys(userData).length === 0) {
       navigate('/login')
-      dispatch(
-        setPendingAction({
-          action: 'addToWishlist',
-          product_id: props.product.id,
-        })
-      )
     }
+    dispatch(
+      setPendingAction({
+        action: 'addToWishlist',
+        product_id: props.product.id,
+      })
+    )
   }
 
   return (

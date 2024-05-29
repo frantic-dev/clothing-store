@@ -8,7 +8,12 @@ export const wishlistSlice = createSlice({
   initialState,
   reducers: {
     setWishlist(state, action) {
-      return action.payload.split(',')
+      const wishlistString = action.payload.toString()
+      if (wishlistString.length === 1) {
+        return [wishlistString]
+      } else if (wishlistString.length > 1) {
+        return action.payload.split(',')
+      }
     },
   },
 })

@@ -18,8 +18,7 @@ export default function Root() {
   const userLoggedIn = Object.keys(user).length !== 0
 
   async function clearSession() {
-    const response = await axios.get('/api/clear-session')
-    console.log(response)
+    await axios.get('/api/clear-session')
   }
   useEffect(() => {
     dispatch(initializeProducts())

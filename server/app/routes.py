@@ -63,18 +63,15 @@ def getProduct(product_id):
 @app.route('/api/wishlist', methods=['GET', 'POST'])  # type: ignore
 def wishlist():
     current_user = session.get('current_user')
+    user = db.session.scalar(
+        sa.select(User).where(User.email == current_user['email'])
+    )
     if request.method == 'POST':
         data = request.get_json()
         product_id = str(data['product_id'])
-        user = db.session.scalar(
-            sa.select(User).where(User.email == current_user['email'])
-        )
         user.wishlist = user.wishlist + ',' +  \
             product_id if user.wishlist else product_id
         db.session.commit()
         return user.wishlist
     if request.method == 'GET' and not current_user == None:
-        user = db.session.scalar(
-            sa.select(User).where(User.email == current_user['email'])
-        )
         return user.wishlist

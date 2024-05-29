@@ -14,6 +14,10 @@ function ProductCard(props) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  function productInWishlist() {
+    return wishlist.some(id => id === String(props.product.id))
+  }
+
   function preventReferral(e) {
     const element = e.target.className
     if (element === 'heart-icon' || element === 'white-btn') {
@@ -47,7 +51,7 @@ function ProductCard(props) {
           {showElements && <WhiteButton text='Add to Cart' />}
           {showElements && (
             <>
-              {wishlist.some(id => id === String(props.product.id)) ? (
+              { productInWishlist() ? (
                 <img
                   src={RedHeartIcon}
                   className='heart-icon'

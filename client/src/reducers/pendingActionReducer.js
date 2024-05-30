@@ -20,7 +20,8 @@ export const { setPendingAction } = pendingActionSlice.actions
 export const performPendingAction = action => {
   if (action.name === 'addToWishlist') {
     return async dispatch => {
-      const currentWishlist = await (await axios.get('/api/wishlist')).data
+      const request = await axios.get('/api/wishlist')
+      const currentWishlist = request.data.toString()
 
       // add to wishlist if product is not already included
       if (!currentWishlist.includes(action.product_id)) {
@@ -28,6 +29,34 @@ export const performPendingAction = action => {
           product_id: action.product_id,
         })
         dispatch(setWishlist(postedWishlist.data))
+      }
+    }
+  }
+
+  if (action.name === 'removeFromWishlist') {
+    return async dispatch => {
+      const request = await axios.get('/api/wishlist')
+      const currentWishlist = request.data.toString()
+
+      if (currentWishlist.length === 1) {
+        const request = await axios.put('/api/wishlist', {
+          updatedWishlist: '',
+        })
+        dispatch(setWishlist(request.data))
+      } else {
+        const wishlistArray = currentWishlist.split(',')
+        const product_index = wishlistArray.indexOf(
+          action.product_id.toString()
+        )
+
+        wishlistArray.splice(product_index, 1)
+
+        const newWishlist = wishlistArray.join(',')
+        const response = await axios.put('/api/wishlist', {
+          updatedWishlist: newWishlist,
+        })
+
+        dispatch(setWishlist(response.data))
       }
     }
   }

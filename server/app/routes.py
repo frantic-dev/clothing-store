@@ -60,7 +60,7 @@ def getProduct(product_id):
         (product for product in products.data if product['id'] == int(product_id)), 'yepi')
 
 
-@app.route('/api/wishlist', methods=['GET', 'POST'])  # type: ignore
+@app.route('/api/wishlist', methods=['GET', 'POST', 'PUT'])  # type: ignore
 def wishlist():
     current_user = session.get('current_user')
     user = db.session.scalar(
@@ -73,5 +73,12 @@ def wishlist():
             product_id if user.wishlist else product_id
         db.session.commit()
         return user.wishlist
-    if request.method == 'GET' and not current_user == None:
+
+    elif request.method == 'GET' and not current_user == None:
         return user.wishlist
+
+    elif request.method == 'PUT':
+        data = request.get_json()
+        user.wishlist = data['updatedWishlist']
+        db.session.commit()
+        return data['updatedWishlist']

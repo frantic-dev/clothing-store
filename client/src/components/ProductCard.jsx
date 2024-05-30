@@ -37,6 +37,13 @@ function ProductCard(props) {
     )
   }
 
+  function removeFromWishlist() {
+    dispatch(setPendingAction({
+      name:'removeFromWishlist',
+      product_id: props.product.id
+    }))
+  }
+
   return (
     // show white button and heart icon when hovering over product card
     <Link to={`/shop/${props.product.id}`}>
@@ -55,6 +62,7 @@ function ProductCard(props) {
                 <img
                   src={RedHeartIcon}
                   className='heart-icon'
+                  onClick={removeFromWishlist}
                 />
               ) : (
                 <img

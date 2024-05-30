@@ -13,7 +13,7 @@ export const wishlistSlice = createSlice({
         return [wishlistString]
       } else if (wishlistString.length > 1) {
         return action.payload.split(',')
-      }
+      } else return []
     },
   },
 })

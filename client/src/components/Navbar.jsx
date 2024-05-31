@@ -19,9 +19,13 @@ function Navbar() {
         <Link to={'/'}>Contact Us</Link>
       </div>
       <div>
-        <a href=''>
-          <img src={HeartIcon} className='icon' id='wishlist-icon' />
-        </a>
+        <Link to={'/profile/wishlist'}>
+          <img
+            src={HeartIcon}
+            className='icon'
+            id='wishlist-icon'
+          />
+        </Link>
         <a href=''>
           <CartIcon className='icon' />
         </a>

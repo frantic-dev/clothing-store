@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { initializeProducts } from '../reducers/productsReducer'
@@ -13,6 +13,7 @@ import axios from 'axios'
 
 export default function Root() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const pendingAction = useSelector(state => state.pendingAction)
   const user = useSelector(state => state.user)
   const userLoggedIn = Object.keys(user).length !== 0
@@ -23,11 +24,19 @@ export default function Root() {
   useEffect(() => {
     dispatch(initializeProducts())
 
-    if (userLoggedIn) dispatch(initializeWishlist())
-    else clearSession()
+    if (userLoggedIn) {
+      dispatch(initializeWishlist())
+      if (pendingAction !== null && pendingAction.name === 'redirectToPage') {
+        navigate(pendingAction.page)
+      }
+    } else clearSession()
   }, [])
 
-  if (pendingAction !== null && userLoggedIn) {
+  if (
+    pendingAction !== null &&
+    userLoggedIn &&
+    pendingAction.name !== 'redirectToPage'
+  ) {
     dispatch(performPendingAction(pendingAction))
     dispatch(setPendingAction(null))
   }

@@ -10,6 +10,8 @@ import App from './App.jsx'
 import { createBrowserRouter } from 'react-router-dom'
 import ShopPage from './pages/ShopPage.jsx'
 import ProductPage from './pages/ProductPage.jsx'
+import ProfileRoot from './pages/ProfileRoot.jsx'
+import WishlistPage from './pages/WishlistPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,16 @@ const router = createBrowserRouter([
       {
         element: <ProductPage />,
         path: '/shop/:productId',
+      },
+      {
+        element: <ProfileRoot />,
+        path: 'profile',
+        children: [
+          {
+            path: 'wishlist',
+            element: <WishlistPage />,
+          },
+        ]
       },
     ],
   },

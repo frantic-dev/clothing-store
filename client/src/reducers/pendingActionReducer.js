@@ -21,10 +21,15 @@ export const performPendingAction = action => {
   if (action.name === 'addToWishlist') {
     return async dispatch => {
       const request = await axios.get('/api/wishlist')
-      const currentWishlist = request.data.toString()
+      let currentWishlist = request.data.toString()
+      
+      // convert string to array for proper checking if product_id is already included in wishlist
+      if (currentWishlist.length >= 1) {
+        currentWishlist = currentWishlist.split(',')
+      }
 
       // add to wishlist if product is not already included
-      if (!currentWishlist.includes(action.product_id)) {
+      if (!currentWishlist.includes(action.product_id.toString())) {
         const postedWishlist = await axios.post('api/wishlist', {
           product_id: action.product_id,
         })

@@ -1,0 +1,13 @@
+#wishlist-page {
+  display: grid;
+  grid-template-columns: repeat(4, 20vw);
+  width: 80vw;
+  margin: auto;
+
+  #empty-wishlist {
+    text-align: center;
+    width: 80vw;
+    font-weight: 500;
+    font-size:35px;
+  }
+}

@@ -9,9 +9,9 @@ export const wishlistSlice = createSlice({
   reducers: {
     setWishlist(state, action) {
       const wishlistString = action.payload.toString()
-      if (wishlistString.length === 1) {
+      if (!wishlistString.includes(',')) {
         return [wishlistString]
-      } else if (wishlistString.length > 1) {
+      } else if (wishlistString.includes(',')) {
         return action.payload.split(',')
       } else return []
     },

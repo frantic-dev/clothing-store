@@ -1,0 +1,11 @@
+#cart {
+  position: relative;
+  &-pop-up {
+    position: absolute;
+    width: 250px;
+    padding: 10px;
+    background-color: white;
+    right: 0;
+    outline: 1px solid grey;
+  }
+}

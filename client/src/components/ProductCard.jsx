@@ -13,6 +13,7 @@ function ProductCard(props) {
   const wishlist = useSelector(state => state.wishlist)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const noUser = Object.keys(userData).length === 0
 
   function productInWishlist() {
     return wishlist.some(id => id === String(props.product.id))
@@ -26,7 +27,7 @@ function ProductCard(props) {
   }
 
   function addToWishlist() {
-    if (Object.keys(userData).length === 0) {
+    if (noUser) {
       navigate('/login')
     }
     dispatch(
@@ -38,10 +39,24 @@ function ProductCard(props) {
   }
 
   function removeFromWishlist() {
-    dispatch(setPendingAction({
-      name:'removeFromWishlist',
-      product_id: props.product.id
-    }))
+    dispatch(
+      setPendingAction({
+        name: 'removeFromWishlist',
+        product_id: props.product.id,
+      })
+    )
+  }
+
+  function addToCart() {
+    if (noUser) {
+      navigate('/login')
+    }
+    dispatch(
+      setPendingAction({
+        name: 'addToCart',
+        product_id: props.product.id,
+      })
+    )
   }
 
   return (
@@ -55,10 +70,15 @@ function ProductCard(props) {
       >
         <div>
           <img src={props.product.image} />
-          {showElements && <WhiteButton text='Add to Cart' />}
+          {showElements && (
+            <WhiteButton
+              text='Add to Cart'
+              handleClick={addToCart}
+            />
+          )}
           {showElements && (
             <>
-              { productInWishlist() ? (
+              {productInWishlist() ? (
                 <img
                   src={RedHeartIcon}
                   className='heart-icon'

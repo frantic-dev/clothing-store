@@ -2,6 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 import { setWishlist } from './wishlistReducer'
+import { setCart } from './cartReducer'
 
 const initialState = null
 
@@ -22,7 +23,7 @@ export const performPendingAction = action => {
     return async dispatch => {
       const request = await axios.get('/api/wishlist')
       let currentWishlist = request.data.toString()
-      
+
       // convert string to array for proper checking if product_id is already included in wishlist
       if (currentWishlist.length >= 1) {
         currentWishlist = currentWishlist.split(',')
@@ -62,6 +63,26 @@ export const performPendingAction = action => {
         })
 
         dispatch(setWishlist(response.data))
+      }
+    }
+  }
+
+  if (action.name === 'addToCart') {
+    return async dispatch => {
+      const request = await axios.get('/api/cart')
+      let currentCart = request.data.toString()
+
+      // convert string to array for proper checking if product_id is already included in cart
+      if (currentCart.length >= 1) {
+        currentCart = currentCart.split(',')
+      }
+
+      // add to cart if product is not already included
+      if (!currentCart.includes(action.product_id.toString())) {
+        const postedCart = await axios.post('api/cart', {
+          product_id: action.product_id,
+        })
+        dispatch(setCart(postedCart.data))
       }
     }
   }

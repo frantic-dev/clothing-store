@@ -10,6 +10,7 @@ import {
 } from '../reducers/pendingActionReducer'
 import { initializeWishlist } from '../reducers/wishlistReducer'
 import axios from 'axios'
+import { initializeCart } from '../reducers/cartReducer'
 
 export default function Root() {
   const dispatch = useDispatch()
@@ -26,6 +27,7 @@ export default function Root() {
 
     if (userLoggedIn) {
       dispatch(initializeWishlist())
+      dispatch(initializeCart())
       if (pendingAction !== null && pendingAction.name === 'redirectToPage') {
         navigate(pendingAction.page)
       }

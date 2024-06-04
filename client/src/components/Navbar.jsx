@@ -3,10 +3,13 @@ import HeartIcon from '../assets/transparent-heart-icon.png'
 import CartIcon from '../assets/cart-icon.svg?react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useState } from 'react'
+import CartPopUp from './CartPopUp'
 
 function Navbar() {
   const userFirstName = useSelector(state => state.user.firstName)
   const userLastName = useSelector(state => state.user.lastName)
+  const [display, setDisplay] = useState(false)
 
   return (
     <nav>
@@ -26,9 +29,14 @@ function Navbar() {
             id='wishlist-icon'
           />
         </Link>
-        <a href=''>
-          <CartIcon className='icon' />
-        </a>
+
+        <div id='cart'>
+          <CartIcon
+            className='icon'
+            onClick={() => setDisplay(!display)}
+          />
+          {display && <CartPopUp />}
+        </div>
 
         {userFirstName ? (
           <span id='username'>{`${userFirstName} ${userLastName}`}</span>

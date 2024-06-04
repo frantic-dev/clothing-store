@@ -6,6 +6,7 @@ import filtersReducer from './reducers/filtersReducer'
 import pendingActionReducer from './reducers/pendingActionReducer'
 import wishlistReducer from './reducers/wishlistReducer'
 import logger from 'redux-logger'
+import cartReducer from './reducers/cartReducer'
 
 export default configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export default configureStore({
     filter: filtersReducer,
     pendingAction: pendingActionReducer,
     wishlist: wishlistReducer,
+    cart: cartReducer,
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
 })

@@ -82,3 +82,27 @@ def wishlist():
         user.wishlist = data['updatedWishlist']
         db.session.commit()
         return data['updatedWishlist']
+
+
+@app.route('/api/cart', methods=['GET', 'POST', 'PUT'])  # type: ignore
+def cart():
+    current_user = session.get('current_user')
+    user = db.session.scalar(
+        sa.select(User).where(User.email == current_user['email'])
+    )
+    if request.method == 'POST':
+        data = request.get_json()
+        product_id = str(data['product_id'])
+        user.cart = user.cart + ',' +  \
+            product_id if user.cart else product_id
+        db.session.commit()
+        return user.cart
+
+    elif request.method == 'GET' and not current_user == None:
+        return user.cart or ''
+
+    elif request.method == 'PUT':
+        data = request.get_json()
+        user.cart = data['updatedCart']
+        db.session.commit()
+        return data['updatedCart']

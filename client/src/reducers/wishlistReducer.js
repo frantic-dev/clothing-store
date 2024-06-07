@@ -22,7 +22,13 @@ export const { setWishlist } = wishlistSlice.actions
 
 export const initializeWishlist = () => {
   return async dispatch => {
-    const wishlist = await axios.get('api/wishlist')
+    let wishlist
+    for (let i = 1; i > 0; i--) {
+      wishlist = await axios.get('api/wishlist')
+      if (wishlist.data.toString().includes('react')) {
+        i += 1
+      }
+    }
     dispatch(setWishlist(wishlist.data))
   }
 }

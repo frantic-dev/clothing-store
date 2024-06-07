@@ -21,7 +21,7 @@ function Navbar() {
         <Link to={'/'}>Blog</Link>
         <Link to={'/'}>Contact Us</Link>
       </div>
-      <div>
+      <div id='nav-right'>
         <Link to={'/profile/wishlist'}>
           <img
             src={HeartIcon}

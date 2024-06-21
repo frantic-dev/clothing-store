@@ -5,15 +5,16 @@ import {
   addToCartTotal,
   initializeCartTotal,
 } from '../reducers/cartTotalReducer'
+import CartTotal from './CartTotal'
 
 function CartPopUp() {
+  const dispatch = useDispatch()
   const cart = useSelector(state => state.cart)
   const products = useSelector(state => state.products)
   const cartItems = products.filter(product =>
     cart.includes(product.id.toString())
   )
-  const cartTotal = useSelector(state => state.cartTotal)
-  const dispatch = useDispatch()
+
   dispatch(initializeCartTotal())
 
   const displayCartItems = cartItems.map((item, index) => {
@@ -35,7 +36,7 @@ function CartPopUp() {
         <div id='items'>{displayCartItems}</div>
         <div id='subtotal'>
           <div>Subtotal</div>
-          <div>{cartTotal}$</div>
+          <CartTotal />
         </div>
       </div>
     )

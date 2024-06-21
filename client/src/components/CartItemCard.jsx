@@ -1,6 +1,9 @@
+import { useDispatch } from 'react-redux'
 import TrashIcon from '../assets/trash-icon.svg?react'
+import { addToCartTotal } from '../reducers/cartTotalReducer'
 
 function CartItemCard(props) {
+
   return (
     <div className='cart-item'>
       <img src={props.product.image} />

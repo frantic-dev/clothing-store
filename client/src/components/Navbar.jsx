@@ -35,7 +35,7 @@ function Navbar() {
             className='icon'
             onClick={() => setDisplay(!display)}
           />
-          {display && <CartPopUp />}
+          {display && <CartPopUp display={display} />}
         </div>
 
         {userFirstName ? (

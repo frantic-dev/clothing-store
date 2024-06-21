@@ -2,7 +2,7 @@
   position: relative;
   &-pop-up {
     position: absolute;
-    width: 350px;
+    width: 400px;
     padding: 10px;
     background-color: white;
     right: 0;
@@ -20,6 +20,11 @@
       }
       .price {
         font-weight: 700;
+      }
+      .trash-icon {
+        height: 5rem;
+        fill: red;
+        align-self: self-end;
       }
     }
   }

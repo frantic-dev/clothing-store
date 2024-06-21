@@ -8,6 +8,10 @@
     right: 0;
     outline: 1px solid grey;
 
+    .price,
+    #subtotal {
+      font-weight: 700;
+    }
     .cart-item {
       display: flex;
       align-items: center;
@@ -18,14 +22,17 @@
         object-fit: cover;
         padding: 10px;
       }
-      .price {
-        font-weight: 700;
-      }
       .trash-icon {
         height: 5rem;
         fill: red;
         align-self: self-end;
       }
+    }
+
+    #subtotal {
+      display: flex;
+      justify-content: space-between;
+      margin: 15px 0;
     }
   }
 }

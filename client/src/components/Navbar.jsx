@@ -11,6 +11,23 @@ function Navbar() {
   const userLastName = useSelector(state => state.user.lastName)
   const [display, setDisplay] = useState(false)
 
+  function hidePopup() {
+    window.addEventListener('click', e => {
+      const cartPopUp = document.getElementById('cart-pop-up')
+
+      if (
+        cartPopUp &&
+        e.target !== cartPopUp &&
+        !cartPopUp.contains(e.target) &&
+        e.target.tagName !== 'svg'
+      ) {
+        setDisplay(false)
+      }
+    })
+  }
+
+  hidePopup()
+
   return (
     <nav>
       <div>Logo</div>

@@ -9,7 +9,6 @@ import {
   setPendingAction,
 } from '../reducers/pendingActionReducer'
 import { initializeWishlist } from '../reducers/wishlistReducer'
-import axios from 'axios'
 import { initializeCart } from '../reducers/cartReducer'
 
 export default function Root() {
@@ -19,9 +18,6 @@ export default function Root() {
   const user = useSelector(state => state.user)
   const userLoggedIn = Object.keys(user).length !== 0
 
-  async function clearSession() {
-    await axios.get('/api/clear-session')
-  }
   useEffect(() => {
     dispatch(initializeProducts())
 
@@ -31,7 +27,7 @@ export default function Root() {
       if (pendingAction !== null && pendingAction.name === 'redirectToPage') {
         navigate(pendingAction.page)
       }
-    } else clearSession()
+    }
   }, [])
 
   if (

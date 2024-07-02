@@ -1,5 +1,4 @@
 from typing import Optional
-from jinja2 import Undefined
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from app import db

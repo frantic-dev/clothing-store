@@ -1,14 +1,14 @@
-from flask import request, session
-from flask_login import current_user
+from flask import after_this_request, make_response, request
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 import sqlalchemy as sa
 from app import app, db, products
 from app.models import User
 
 
-@app.route('/api/clear-session')
-def clear_session():
-    session.pop('current_user', None)
-    return 'session cleared'
+@app.route('/api/auth/token')
+def access_token():
+    access_token = request.cookies.get('access_token')
+    return access_token
 
 
 @app.route('/api/login', methods=['GET', 'POST'])  # type: ignore
@@ -20,10 +20,19 @@ def login():
         user = db.session.scalar(
             sa.select(User).where(User.email == data['email'])
         )
-        session['current_user'] = data
         if user is None or not user.check_password(data['password']):
             return {'loginSuccess': False, 'response': 'wrong username or password'}
-        return {'loginSuccess': True, 'firstName': user.firstName, 'lastName': user.lastName, 'email': user.email, 'wishlist': user.wishlist}
+
+        access_token = create_access_token(identity=user.id)
+        response = make_response()
+
+        @after_this_request
+        def after_login(response):
+            response.set_cookie(
+                'access_token', value=access_token, secure=True, httponly=True, max_age=60*60*24*7, samesite='Lax')
+            return response
+
+        return {'loginSuccess': True, 'firstName': user.firstName, 'lastName': user.lastName, 'email': user.email, 'wishlist': user.wishlist, 'cart': user.cart}
 
 
 @app.route('/api/signup', methods=['GET', 'POST'])  # type: ignore
@@ -41,7 +50,6 @@ def signup():
             new_user.set_password(data['password'])
             db.session.add(new_user)
             db.session.commit()
-            session['current_user'] = data
             return {'loginSuccess': True, 'firstName': data['firstName'], 'lastName': data['lastName']}
         return {'signupSuccess': False, 'response': 'an account already exists with that email'}
 
@@ -61,10 +69,11 @@ def getProduct(product_id):
 
 
 @app.route('/api/wishlist', methods=['GET', 'POST', 'PUT'])  # type: ignore
+@jwt_required()
 def wishlist():
-    current_user = session.get('current_user')
+    user_id = get_jwt_identity()
     user = db.session.scalar(
-        sa.select(User).where(User.email == current_user['email'])
+        sa.select(User).where(User.id == user_id)
     )
     if request.method == 'POST':
         data = request.get_json()
@@ -74,8 +83,8 @@ def wishlist():
         db.session.commit()
         return user.wishlist
 
-    elif request.method == 'GET' and not current_user == None:
-        return user.wishlist
+    elif request.method == 'GET' and not user == None:
+        return user.wishlist or ''
 
     elif request.method == 'PUT':
         data = request.get_json()
@@ -85,10 +94,11 @@ def wishlist():
 
 
 @app.route('/api/cart', methods=['GET', 'POST', 'PUT'])  # type: ignore
+@jwt_required()
 def cart():
-    current_user = session.get('current_user')
+    user_id = get_jwt_identity()
     user = db.session.scalar(
-        sa.select(User).where(User.email == current_user['email'])
+        sa.select(User).where(User.id == user_id)
     )
     if request.method == 'POST':
         data = request.get_json()
@@ -98,7 +108,7 @@ def cart():
         db.session.commit()
         return user.cart
 
-    elif request.method == 'GET' and not current_user == None:
+    elif request.method == 'GET' and not user == None:
         return user.cart or ''
 
     elif request.method == 'PUT':

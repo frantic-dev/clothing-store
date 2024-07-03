@@ -21,10 +21,9 @@ def refresh_expiring_jwts(response):
         return response
 
 
-@app.route('/api/auth/token')
-def access_token():
-    access_token = request.cookies.get('access_token')
-    return access_token or ''
+@app.route('/api/auth')
+def csrf():
+    return request.cookies
 
 
 @app.route('/api/login', methods=['GET', 'POST'])  # type: ignore

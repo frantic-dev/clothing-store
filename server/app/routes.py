@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, timezone
-from flask import after_this_request, make_response, request
+from flask import jsonify, request
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, jwt_required, set_access_cookies
 import sqlalchemy as sa
 from app import app, db, products
@@ -24,7 +24,7 @@ def refresh_expiring_jwts(response):
 @app.route('/api/auth/token')
 def access_token():
     access_token = request.cookies.get('access_token')
-    return access_token
+    return access_token or ''
 
 
 @app.route('/api/login', methods=['GET', 'POST'])  # type: ignore
@@ -40,15 +40,26 @@ def login():
             return {'loginSuccess': False, 'response': 'wrong username or password'}
 
         access_token = create_access_token(identity=user.id)
-        response = make_response()
 
-        @after_this_request
-        def after_login(response):
-            response.set_cookie(
-                'access_token', value=access_token, secure=True, httponly=True, max_age=60*60*24*7, samesite='Lax')
-            return response
+        response = jsonify(
+            {'loginSuccess': True, 'firstName': user.firstName,
+                'lastName': user.lastName, 'email': user.email}
+        )
 
-        return {'loginSuccess': True, 'firstName': user.firstName, 'lastName': user.lastName, 'email': user.email, 'wishlist': user.wishlist, 'cart': user.cart}
+        set_access_cookies(response, access_token)
+        return response, 200
+
+
+@app.route('/api/rememberUser')
+@jwt_required()
+def rememberUser():
+    user_id = get_jwt_identity()
+    user = db.session.scalar(
+        sa.select(User).where(User.id == user_id)
+    )
+    if user is None:
+        return {'success': False}
+    return {'success': True, 'firstName': user.firstName, 'lastName': user.lastName, 'email': user.email}
 
 
 @app.route('/api/signup', methods=['GET', 'POST'])  # type: ignore

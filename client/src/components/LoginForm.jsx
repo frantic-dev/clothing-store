@@ -33,9 +33,7 @@ function LoginForm() {
 
     if (response.data.loginSuccess) {
       dispatch(setUser({ ...response.data }))
-      if (loginData.rememberMe) {
-        localStorage.setItem('rememberMe', true)
-      }
+      localStorage.setItem('rememberMe', loginData.rememberMe)
       navigate('/')
     } else {
       dispatch(displayNotification())

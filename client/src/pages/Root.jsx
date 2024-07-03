@@ -10,17 +10,29 @@ import {
 } from '../reducers/pendingActionReducer'
 import { initializeWishlist } from '../reducers/wishlistReducer'
 import { initializeCart } from '../reducers/cartReducer'
+import axios from 'axios'
+import { setUser } from '../reducers/userReducer'
 
 export default function Root() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const pendingAction = useSelector(state => state.pendingAction)
   const user = useSelector(state => state.user)
-  const userLoggedIn = Object.keys(user).length !== 0
+  let userLoggedIn = Object.keys(user).length !== 0
 
-  useEffect(() => {
-    dispatch(initializeProducts())
+  async function rememberUser() {
+    const rememberMe = localStorage.getItem('rememberMe') || false
 
+    if (rememberMe === 'true') {
+      const response = await axios.get('/api/rememberUser')
+      const UserData = response.data
+
+      if (UserData && UserData.success) {
+        console.log('it worked')
+        dispatch(setUser({ ...UserData }))
+        userLoggedIn = true
+      }
+    }
     if (userLoggedIn) {
       dispatch(initializeWishlist())
       dispatch(initializeCart())
@@ -28,6 +40,11 @@ export default function Root() {
         navigate(pendingAction.page)
       }
     }
+  }
+
+  useEffect(() => {
+    dispatch(initializeProducts())
+    rememberUser()
   }, [])
 
   if (

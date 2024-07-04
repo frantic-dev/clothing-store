@@ -34,9 +34,7 @@ function SignupForm() {
     if (response.data.loginSuccess) {
       dispatch(setUser({ ...response.data }))
       navigate('/')
-      console.log('sign in successfully')
     } else {
-      console.log('failed sign up')
       dispatch(displayNotification())
     }
   }

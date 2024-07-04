@@ -6,7 +6,7 @@ import store from './store'
 import { Provider } from 'react-redux'
 import addInterceptor from './intercept'
 
-addInterceptor()
+// addInterceptor()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>

@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { setUser } from '../reducers/userReducer'
 import { displayNotification } from '../reducers/notificationReducer'
 import Notification from './Notification'
+import addInterceptor from '../intercept'
 
 function LoginForm() {
   const dispatch = useDispatch()
@@ -35,6 +36,7 @@ function LoginForm() {
       dispatch(setUser({ ...response.data }))
       localStorage.setItem('rememberMe', loginData.rememberMe)
       navigate('/')
+      addInterceptor()
     } else {
       dispatch(displayNotification())
     }

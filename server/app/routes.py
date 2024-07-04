@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, timezone
-from flask import jsonify, request
-from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, jwt_required, set_access_cookies
+from urllib import response
+from flask import jsonify, make_response, request
+from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, jwt_required, set_access_cookies, unset_jwt_cookies
 import sqlalchemy as sa
 from app import app, db, products
 from app.models import User
@@ -22,8 +23,15 @@ def refresh_expiring_jwts(response):
 
 
 @app.route('/api/auth')
-def csrf():
+def get_cookies():
     return request.cookies
+
+
+@app.route('/api/delete-auth')
+def delete_cookies():
+    response = make_response()
+    unset_jwt_cookies(response)
+    return response
 
 
 @app.route('/api/login', methods=['GET', 'POST'])  # type: ignore

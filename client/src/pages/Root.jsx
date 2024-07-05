@@ -10,9 +10,9 @@ import {
 } from '../reducers/pendingActionReducer'
 import { initializeWishlist } from '../reducers/wishlistReducer'
 import { initializeCart } from '../reducers/cartReducer'
-import axios from 'axios'
 import { setUser } from '../reducers/userReducer'
 import addInterceptor from '../intercept'
+import userServices from '../services/userServices'
 
 export default function Root() {
   const dispatch = useDispatch()
@@ -26,8 +26,7 @@ export default function Root() {
   async function rememberUser() {
     if (rememberMe) {
       try {
-        const response = await axios.get('/api/rememberUser')
-        const UserData = response.data
+        const UserData = await userServices.rememberUser()
 
         if (UserData && UserData.success) {
           dispatch(setUser({ ...UserData }))
@@ -47,7 +46,7 @@ export default function Root() {
     }
   }
   async function deleteTokens() {
-    await axios.get('/api/delete-auth')
+    await userServices.deleteTokens()
   }
 
   useEffect(() => {

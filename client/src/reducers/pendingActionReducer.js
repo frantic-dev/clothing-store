@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
 import { setWishlist } from './wishlistReducer'
 import { setCart } from './cartReducer'
+import cartServices from '../services/cartServices'
+import wishlistServices from '../services/wishlistServices'
 
 const initialState = null
 
@@ -21,36 +22,34 @@ export const { setPendingAction } = pendingActionSlice.actions
 export const performPendingAction = action => {
   if (action.name === 'addToWishlist') {
     return async dispatch => {
-      const request = await axios.get('/api/wishlist')
-      let currentWishlist = request.data.toString()
+      let wishlist = (await wishlistServices.getWishlist()).toString()
 
       // convert string to array for proper checking if product_id is already included in wishlist
-      if (currentWishlist.length >= 1) {
-        currentWishlist = currentWishlist.split(',')
+      if (wishlist.length >= 1) {
+        wishlist = wishlist.split(',')
       }
 
       // add to wishlist if product is not already included
-      if (!currentWishlist.includes(action.product_id.toString())) {
-        const postedWishlist = await axios.post('api/wishlist', {
+      if (!wishlist.includes(action.product_id.toString())) {
+        const newWishlist = await wishlistServices.addToWishlist({
           product_id: action.product_id,
         })
-        dispatch(setWishlist(postedWishlist.data))
+        dispatch(setWishlist(newWishlist))
       }
     }
   }
 
   if (action.name === 'removeFromWishlist') {
     return async dispatch => {
-      const request = await axios.get('/api/wishlist')
-      const currentWishlist = request.data.toString()
+      let wishlist = (await wishlistServices.getWishlist()).toString()
 
-      if (currentWishlist.length === 1) {
-        const request = await axios.put('/api/wishlist', {
+      if (wishlist.length === 1) {
+        const newWishlist = await wishlistServices.removeFromWishlist({
           updatedWishlist: '',
         })
-        dispatch(setWishlist(request.data))
+        dispatch(setWishlist(newWishlist))
       } else {
-        const wishlistArray = currentWishlist.split(',')
+        const wishlistArray = wishlist.split(',')
         const product_index = wishlistArray.indexOf(
           action.product_id.toString()
         )
@@ -58,31 +57,30 @@ export const performPendingAction = action => {
         wishlistArray.splice(product_index, 1)
 
         const newWishlist = wishlistArray.join(',')
-        const response = await axios.put('/api/wishlist', {
+        const updatedWishlist = await wishlistServices.removeFromWishlist({
           updatedWishlist: newWishlist,
         })
 
-        dispatch(setWishlist(response.data))
+        dispatch(setWishlist(updatedWishlist))
       }
     }
   }
 
   if (action.name === 'addToCart') {
     return async dispatch => {
-      const request = await axios.get('/api/cart')
-      let currentCart = request.data.toString()
+      let cart = (await cartServices.getCart()).toString()
 
       // convert string to array for proper checking if product_id is already included in cart
-      if (currentCart.length >= 1) {
-        currentCart = currentCart.split(',')
+      if (cart.length >= 1) {
+        cart = cart.split(',')
       }
 
       // add to cart if product is not already included
-      if (!currentCart.includes(action.product_id.toString())) {
-        const postedCart = await axios.post('api/cart', {
+      if (!cart.includes(action.product_id.toString())) {
+        const newCart = await cartServices.addToCart({
           product_id: action.product_id,
         })
-        dispatch(setCart(postedCart.data))
+        dispatch(setCart(newCart))
       }
     }
   }

@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
@@ -6,6 +5,7 @@ import { setUser } from '../reducers/userReducer'
 import { displayNotification } from '../reducers/notificationReducer'
 import Notification from './Notification'
 import addInterceptor from '../intercept'
+import userServices from '../services/userServices'
 
 function LoginForm() {
   const dispatch = useDispatch()
@@ -30,10 +30,11 @@ function LoginForm() {
   }
   async function handleSubmit(e) {
     e.preventDefault()
-    const response = await axios.post('/api/login', loginData)
+    const login = await userServices.loginUser(loginData)
+    console.log(login)
 
-    if (response.data.loginSuccess) {
-      dispatch(setUser({ ...response.data }))
+    if (login.success) {
+      dispatch(setUser({ ...login }))
       localStorage.setItem('rememberMe', loginData.rememberMe)
       navigate('/')
       addInterceptor()

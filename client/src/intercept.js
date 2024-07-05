@@ -1,7 +1,8 @@
 import axios from 'axios'
+import userServices from './services/userServices'
 
 export default async function addInterceptor() {
-  const cookies = await (await axios.get('/api/auth')).data
+  const cookies = await userServices.getCookies()
   const validCookies = Object.keys(cookies).length > 0
 
   axios.interceptors.request.use(config => {

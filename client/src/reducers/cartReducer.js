@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+import cartServices from '../services/cartServices'
 
 const initialState = []
 
@@ -22,8 +22,9 @@ export const { setCart } = cartSlice.actions
 
 export const initializeCart = () => {
   return async dispatch => {
-    const cart = await axios.get('/api/cart')
-    dispatch(setCart(cart.data))
+    const cart = await cartServices.getCart()
+    console.log(cart)
+    dispatch(setCart(cart))
   }
 }
 

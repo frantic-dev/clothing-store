@@ -5,4 +5,9 @@ const getCart = async () => {
   return response.data
 }
 
-export default getCart
+const addToCart = async product_id => {
+  const response = await axios.post('/api/cart', product_id)
+  return response.data
+}
+
+export default { getCart, addToCart }

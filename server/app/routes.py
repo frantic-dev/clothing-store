@@ -44,12 +44,12 @@ def login():
             sa.select(User).where(User.email == data['email'])
         )
         if user is None or not user.check_password(data['password']):
-            return {'loginSuccess': False, 'response': 'wrong username or password'}
+            return {'success': False, 'response': 'wrong username or password'}
 
         access_token = create_access_token(identity=user.id)
 
         response = jsonify(
-            {'loginSuccess': True, 'firstName': user.firstName,
+            {'success': True, 'firstName': user.firstName,
                 'lastName': user.lastName, 'email': user.email}
         )
 
@@ -84,8 +84,8 @@ def signup():
             new_user.set_password(data['password'])
             db.session.add(new_user)
             db.session.commit()
-            return {'loginSuccess': True, 'firstName': data['firstName'], 'lastName': data['lastName']}
-        return {'signupSuccess': False, 'response': 'an account already exists with that email'}
+            return {'success': True, 'firstName': data['firstName'], 'lastName': data['lastName']}
+        return {'success': False, 'response': 'an account already exists with that email'}
 
 
 @app.route('/api/products')

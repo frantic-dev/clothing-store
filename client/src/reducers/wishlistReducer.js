@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+import wishlistServices from '../services/wishlistServices'
 
 const initialState = []
 
@@ -22,8 +22,8 @@ export const { setWishlist } = wishlistSlice.actions
 
 export const initializeWishlist = () => {
   return async dispatch => {
-    const wishlist = await axios.get('/api/wishlist')
-    dispatch(setWishlist(wishlist.data))
+    const wishlist = await wishlistServices.getWishlist()
+    dispatch(setWishlist(wishlist))
   }
 }
 

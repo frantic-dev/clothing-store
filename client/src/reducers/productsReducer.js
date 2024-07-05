@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import productService from '../services/products'
+import productServices from '../services/productServices'
 
 const initialState = []
 
@@ -18,7 +18,7 @@ export const { setProducts } = productSlice.actions
 
 export const initializeProducts = () => {
   return async dispatch => {
-    const products = await productService.getAll()
+    const products = await productServices.getAll()
     dispatch(setProducts(products))
   }
 }

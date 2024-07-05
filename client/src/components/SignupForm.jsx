@@ -1,10 +1,10 @@
-import axios from 'axios'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Notification from './Notification'
 import { displayNotification } from '../reducers/notificationReducer'
 import { setUser } from '../reducers/userReducer'
 import { useNavigate } from 'react-router-dom'
+import userServices from '../services/userServices'
 
 function SignupForm() {
   const notification = useSelector(state => state.notification)
@@ -30,9 +30,9 @@ function SignupForm() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const response = await axios.post('/api/signup', signupData)
-    if (response.data.loginSuccess) {
-      dispatch(setUser({ ...response.data }))
+    const signup = await userServices.signupUser(signupData)
+    if (signup.success) {
+      dispatch(setUser({ ...signup }))
       navigate('/')
     } else {
       dispatch(displayNotification())

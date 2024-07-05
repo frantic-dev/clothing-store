@@ -1,23 +1,22 @@
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ProductDetails from '../modules/ProductDetails'
 import DownArrowIcon from '../assets/down-arrow-icon.svg?react'
 import '../styles/pages/product-page.scss'
 import RelatedProducts from '../components/RelatedProducts'
+import productServices from '../services/productServices'
 
 function ProductPage() {
   const { productId } = useParams()
   const [product, setProduct] = useState({})
 
   async function getProductData() {
-    const response = await (await axios.get(`/api/products/${productId}`)).data
-    setProduct(response)
+    const targetProduct = await productServices.getProduct(productId)
+    setProduct(targetProduct)
   }
   useEffect(() => {
     getProductData()
     window.scrollTo(0, 0)
-
   }, [productId])
 
   if (Object.keys(product).length > 0) {

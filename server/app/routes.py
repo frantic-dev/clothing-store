@@ -118,6 +118,7 @@ def wishlist():
         return user.wishlist
 
     elif request.method == 'GET' and not user == None:
+        print(user.wishlist)
         return user.wishlist or ''
 
     elif request.method == 'PUT':

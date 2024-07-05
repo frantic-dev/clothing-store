@@ -9,6 +9,7 @@ import addInterceptor from '../intercept'
 
 function LoginForm() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const notification = useSelector(state => state.notification)
 
   const [loginData, setLoginData] = useState({
@@ -16,7 +17,6 @@ function LoginForm() {
     password: '',
     rememberMe: false,
   })
-  const navigate = useNavigate()
 
   function handleChange(e) {
     setLoginData({ ...loginData, [e.target.name]: e.target.value })

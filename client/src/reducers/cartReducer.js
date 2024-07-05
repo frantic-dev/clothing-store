@@ -22,7 +22,7 @@ export const { setCart } = cartSlice.actions
 
 export const initializeCart = () => {
   return async dispatch => {
-    const cart = await axios.get('api/cart')
+    const cart = await axios.get('/api/cart')
     dispatch(setCart(cart.data))
   }
 }

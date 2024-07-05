@@ -3,11 +3,19 @@
   &-pop-up {
     position: absolute;
     width: 400px;
-    padding: 10px;
     background-color: white;
     right: 0;
     outline: 1px solid grey;
     z-index: 2;
+
+    #items {
+      height: 450px;
+      overflow-y: scroll;
+    }
+
+    #subtotal, #total-items {
+      padding: 10px;
+    }
 
     .price,
     #subtotal {
@@ -17,17 +25,29 @@
       display: flex;
       align-items: center;
       height: 150px;
-      border-bottom: 1px solid rgba(175, 175, 175, 0.742);
+      position: relative;
+      padding: 10px;
+      margin: 10px 0;
       img {
         width: 30%;
         object-fit: cover;
         padding: 10px;
       }
       .trash-icon {
-        height: 5rem;
+        width: 50px;
+        position: absolute;
+        right: 0;
         fill: red;
         align-self: self-end;
       }
+    }
+
+    .cart-popup-break {
+      border: 1px solid rgba(206, 206, 206, 0.445);
+      border-radius: 50%;
+      width: 90%;
+      margin: auto;
+
     }
 
     #subtotal {

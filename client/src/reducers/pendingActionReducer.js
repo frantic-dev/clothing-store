@@ -84,6 +84,28 @@ export const performPendingAction = action => {
       }
     }
   }
+  if (action.name === 'removeFromCart') {
+    return async dispatch => {
+      let cart = (await cartServices.getCart()).toString()
+      if (cart.length === 1) {
+        const newCart = await cartServices.removeFromCart({
+          updatedCart: '',
+        })
+        dispatch(setCart(newCart))
+      } else {
+        const cartArray = cart.split(',')
+        const product_index = cartArray.indexOf(
+          action.product_id.toString()
+        )
+        cartArray.splice(product_index, 1)
+        const newCart = cartArray.join(',')
+        const updatedCart = await cartServices.removeFromCart({
+          updatedCart: newCart,
+        })
+        dispatch(setCart(updatedCart))
+      }
+    }
+  }
 }
 
 export default pendingActionSlice.reducer

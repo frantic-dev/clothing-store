@@ -10,4 +10,9 @@ const addToCart = async product_id => {
   return response.data
 }
 
-export default { getCart, addToCart }
+const removeFromCart = async updatedCart => {
+  const response = await axios.put('/api/cart', updatedCart)
+  return response.data
+}
+
+export default { getCart, addToCart, removeFromCart }

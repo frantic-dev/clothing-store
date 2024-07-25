@@ -13,7 +13,6 @@ function WishlistPage() {
 
   useEffect(() => {
     const profileLinks = document.getElementById('links').children
-    console.log(profileLinks)
     for (let link of profileLinks) {
       console.log(link)
       if (link.textContent.includes('wishlist')) {

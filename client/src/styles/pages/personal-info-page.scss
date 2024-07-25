@@ -1,0 +1,16 @@
+#personal-info-form {
+  display: flex;
+  flex-wrap: wrap;
+  label {
+    text-transform: capitalize;
+    font-size: 13px;
+    font-weight: 500;
+    input {
+      display: block;
+      width: 20vw;
+      margin-bottom: 20px;
+      margin-right: 20px;
+      padding: 10px;
+    }
+  }
+}

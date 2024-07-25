@@ -4,7 +4,7 @@
   height: min-content;
   h3 {
     padding: 20px;
-    outline: 1px solid rgba(171, 171, 171, 0.312);
+    border-bottom: 1px solid rgba(160, 160, 160, 0.238);
 
     svg {
       height: 30px;
@@ -17,8 +17,10 @@
   #links {
     .current-profile-link {
       background-color: black;
-      color: white;
       outline: 1px solid black;
+      a {
+        color: white;
+      }
     }
     div {
       padding: 15px 20px;

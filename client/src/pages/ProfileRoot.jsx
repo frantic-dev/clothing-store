@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import { setPendingAction } from '../reducers/pendingActionReducer'
+import ProfileNav from '../components/ProfileNav'
+import '../styles/pages/profile-page.scss'
 
 function ProfileRoot() {
   const dispatch = useDispatch()
@@ -16,9 +18,13 @@ function ProfileRoot() {
     }
   }, [])
   return (
-    <div>
+    <div id='profile-container'>
+      <h2>My Profile</h2>
       <div id='profile-page'>
-        <Outlet />
+        <ProfileNav />
+        <div id='profile-content'>
+          <Outlet />
+        </div>
       </div>
     </div>
   )

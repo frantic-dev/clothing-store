@@ -1,12 +1,11 @@
 #wishlist-page {
   display: grid;
-  grid-template-columns: repeat(4, 20vw);
-  width: 80vw;
+  grid-template-columns: repeat(3,16vw);
   margin: auto;
 
   #empty-wishlist {
     text-align: center;
-    width: 80vw;
+    width: 40vw;
     font-weight: 500;
     font-size:35px;
   }

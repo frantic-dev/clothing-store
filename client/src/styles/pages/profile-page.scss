@@ -1,0 +1,13 @@
+#profile-container {
+  width: 70vw;
+  margin: auto;
+
+  h2 {
+    font-size: 40px;
+    margin: 30px 0;
+  }
+  #profile-page {
+    display: flex;
+    justify-content: space-between;
+  }
+}

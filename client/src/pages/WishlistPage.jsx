@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import '../styles/pages/wishlist-page.scss'
 import ProductCard from '../components/ProductCard'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 
 function WishlistPage() {
   const wishlist = useSelector(state => state.wishlist)
@@ -10,17 +10,6 @@ function WishlistPage() {
   const wishlistProducts = products.filter(product =>
     wishlist.includes(product.id.toString())
   )
-
-  useEffect(() => {
-    const profileLinks = document.getElementById('links').children
-    for (let link of profileLinks) {
-      if (link.textContent.includes('wishlist')) {
-        link.className = 'current-profile-link'
-      } else {
-        link.className = ''
-      }
-    }
-  })
 
   const displayWishlistProducts = wishlistProducts.map((product, index) => (
     <ProductCard

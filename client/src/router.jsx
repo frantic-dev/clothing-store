@@ -13,6 +13,7 @@ import ProductPage from './pages/ProductPage.jsx'
 import ProfileRoot from './pages/ProfileRoot.jsx'
 import WishlistPage from './pages/WishlistPage.jsx'
 import PersonalInfoPage from './pages/PersonalInfoPage.jsx'
+import OrdersPage from './pages/OrdersPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -40,8 +41,12 @@ const router = createBrowserRouter([
             element: <WishlistPage />,
           },
           {
-            path: 'personal-info',
+            path: 'personal',
             element: <PersonalInfoPage />,
+          },
+          {
+            path: 'orders',
+            element: <OrdersPage />,
           },
         ],
       },

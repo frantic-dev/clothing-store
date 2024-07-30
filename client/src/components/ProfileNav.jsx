@@ -15,14 +15,14 @@ function ProfileNav() {
         {firstName} {lastName}
       </h3>
       <div id='links'>
-        <Link to='/profile/personal-info'>
+        <Link to='/profile/personal'>
           <div>personal information</div>
         </Link>
         <Link to='/profile/wishlist'>
           <div>my wishlist</div>
         </Link>
-        <Link to='/profile/cart'>
-          <div>my cart</div>
+        <Link to='/profile/orders'>
+          <div>my orders</div>
         </Link>
         <Link to='/profile/addresses'>
           <div>my addresses</div>

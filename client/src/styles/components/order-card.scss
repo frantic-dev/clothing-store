@@ -1,0 +1,39 @@
+.order-card {
+  .inner-container {
+    display: flex;
+    justify-content: space-between;
+    width: fit-content;
+    margin: 0 20px;
+  }
+  img {
+    height: 150px;
+    width: 100px;
+    object-fit: contain;
+  }
+  .title {
+    font-weight: 600;
+    font-size: 18 px;
+  }
+  .details {
+    width: 75%;
+    // align-self: center;
+  }
+  .description {
+    line-height: 1.5em;
+    max-height: 3em;
+    overflow: hidden;
+  }
+  .price {
+    font-weight: 600;
+    align-self: center;
+  }
+  .delivered {
+    color: rgb(54, 204, 54);
+    background-color: rgb(161, 255, 202);
+    width: min-content;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    margin: 10px auto;
+  }
+}

@@ -5,6 +5,7 @@
   h3 {
     padding: 20px;
     border-bottom: 1px solid rgba(160, 160, 160, 0.238);
+    text-transform: capitalize;
 
     svg {
       height: 30px;
@@ -17,8 +18,8 @@
   #links {
     .current-profile-link {
       div {
-      background-color: black;
-      outline: 1px solid black;
+        background-color: black;
+        outline: 1px solid black;
         color: white;
       }
     }

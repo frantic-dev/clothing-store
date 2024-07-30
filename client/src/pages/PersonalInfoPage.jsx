@@ -24,15 +24,6 @@ function PersonalInfoPage() {
       number: user.number || '',
       address: user.address || '',
     })
-    const profileLinks = document.getElementById('links').children
-
-    for (let link of profileLinks) {
-      if (link.textContent.includes('personal')) {
-        link.className = 'current-profile-link'
-      } else {
-        link.className = ''
-      }
-    }
   }, [user])
 
   function handleChange(e) {

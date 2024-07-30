@@ -1,6 +1,6 @@
 #personal-info-form {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   label {
     text-transform: capitalize;
     font-size: 13px;
@@ -12,5 +12,13 @@
       margin-right: 20px;
       padding: 10px;
     }
+  }
+
+  button {
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    background-color: black;
+    color: white;
   }
 }

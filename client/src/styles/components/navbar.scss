@@ -5,7 +5,10 @@ nav {
   width: 90%;
   margin: auto;
   height: 80px;
-  position: relative;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 2;
 
   a {
     text-decoration: none;

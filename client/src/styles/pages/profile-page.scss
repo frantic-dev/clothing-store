@@ -11,6 +11,11 @@
     justify-content: space-between;
   }
 
+  #profile-nav {
+    position: sticky;
+    top: 10vh;
+  }
+
   #profile-content {
     width: 50vw;
   }

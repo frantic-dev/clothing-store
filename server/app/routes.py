@@ -66,7 +66,7 @@ def rememberUser():
     )
     if user is None:
         return {'success': False}
-    return {'success': True, 'firstName': user.firstName, 'lastName': user.lastName, 'email': user.email}
+    return {'success': True, 'firstName': user.firstName, 'lastName': user.lastName, 'email': user.email, 'number': user.number, 'address': user.address}
 
 
 @app.route('/api/signup', methods=['GET', 'POST'])  # type: ignore
@@ -77,14 +77,13 @@ def signup():
             sa.select(User).where(User.email == data['email'])
         )
         if user is None:
-            # type: ignore
             new_user = User(
                 # type: ignore
                 firstName=data['firstName'], lastName=data['lastName'], email=data['email'])
             new_user.set_password(data['password'])
             db.session.add(new_user)
             db.session.commit()
-            return {'success': True, 'firstName': data['firstName'], 'lastName': data['lastName']}
+            return {'success': True, 'firstName': new_user.firstName, 'lastName': new_user.lastName, 'email': new_user.email, 'number': new_user.number, 'address': new_user.address}
         return {'success': False, 'response': 'an account already exists with that email'}
 
 
@@ -102,52 +101,72 @@ def getProduct(product_id):
         (product for product in products.data if product['id'] == int(product_id)), 'yepi')
 
 
-@app.route('/api/wishlist', methods=['GET', 'POST', 'PUT'])  # type: ignore
+@app.route('/api/wishlist', methods=['GET', 'POST', 'PUT'])
 @jwt_required()
 def wishlist():
     user_id = get_jwt_identity()
     user = db.session.scalar(
         sa.select(User).where(User.id == user_id)
     )
-    if request.method == 'POST':
-        data = request.get_json()
-        product_id = str(data['product_id'])
-        user.wishlist = user.wishlist + ',' +  \
-            product_id if user.wishlist else product_id
-        db.session.commit()
-        return user.wishlist
+    if not user == None:
+        if request.method == 'POST':
+            data = request.get_json()
+            product_id = str(data['product_id'])
+            user.wishlist = user.wishlist + ',' +  \
+                product_id if user.wishlist else product_id
+            db.session.commit()
+            return user.wishlist
 
-    elif request.method == 'GET' and not user == None:
-        print(user.wishlist)
-        return user.wishlist or ''
+        elif request.method == 'GET' and not user == None:
+            print(user.wishlist)
+            return user.wishlist or ''
 
-    elif request.method == 'PUT':
-        data = request.get_json()
-        user.wishlist = data['updatedWishlist']
-        db.session.commit()
-        return data['updatedWishlist']
+        elif request.method == 'PUT':
+            data = request.get_json()
+            user.wishlist = data['updatedWishlist']
+            db.session.commit()
+            return data['updatedWishlist']
 
 
-@app.route('/api/cart', methods=['GET', 'POST', 'PUT'])  # type: ignore
+@app.route('/api/cart', methods=['GET', 'POST', 'PUT'])  
 @jwt_required()
 def cart():
     user_id = get_jwt_identity()
     user = db.session.scalar(
         sa.select(User).where(User.id == user_id)
     )
-    if request.method == 'POST':
-        data = request.get_json()
-        product_id = str(data['product_id'])
-        user.cart = user.cart + ',' +  \
-            product_id if user.cart else product_id
-        db.session.commit()
-        return user.cart
+    if not user == None:
+        if request.method == 'POST':
+            data = request.get_json()
+            product_id = str(data['product_id'])
+            user.cart = user.cart + ',' +  \
+                product_id if user.cart else product_id
+            db.session.commit()
+            return user.cart
 
-    elif request.method == 'GET' and not user == None:
-        return user.cart or ''
+        elif request.method == 'GET' and not user == None:
+            return user.cart or ''
 
-    elif request.method == 'PUT':
+        elif request.method == 'PUT':
+            data = request.get_json()
+            user.cart = data['updatedCart']
+            db.session.commit()
+            return data['updatedCart']
+
+
+@app.route('/api/personal-info', methods=['PUT'])
+@jwt_required()
+def personalInfo():
+    user_id = get_jwt_identity()
+    user = db.session.scalar(
+        sa.select(User).where(User.id == user_id)
+    )
+    if request.method == 'PUT' and not user == None:
         data = request.get_json()
-        user.cart = data['updatedCart']
-        db.session.commit()
-        return data['updatedCart']
+        user.firstName = data['firstName']
+        user.lastName = data['lastName']
+        # user.email = data['email']
+        user.number = data['number']
+        user.address = data['address']
+        db.session.commit()      
+        return {'success': True, 'firstName': user.firstName, 'lastName': user.lastName, 'email': user.email, 'number': user.number, 'address': user.address}

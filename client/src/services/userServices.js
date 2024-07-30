@@ -15,14 +15,19 @@ const getCookies = async () => {
   return response.data
 }
 
-const loginUser = async (loginData) => {
+const loginUser = async loginData => {
   const response = await axios.post('/api/login', loginData)
   return response.data
 }
 
-const signupUser = async (signupData) => {
+const signupUser = async signupData => {
   const response = await axios.post('/api/signup', signupData)
   return response.data
 }
 
-export default { rememberUser, deleteTokens, getCookies, loginUser, signupUser }
+const updateUser = async updatedUserData => {
+  const response = await axios.put('/api/personal-info', updatedUserData)
+  return response.data
+}
+
+export default { rememberUser, deleteTokens, getCookies, loginUser, signupUser, updateUser }

@@ -1,21 +1,28 @@
 import { useEffect, useState } from 'react'
 import '../styles/pages/personal-info-page.scss'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import userServices from '../services/userServices'
+import { setUser } from '../reducers/userReducer'
 
 function PersonalInfoPage() {
+  const dispatch = useDispatch()
   const user = useSelector(state => state.user)
-  const [formData, setFormData] = useState({
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    number: user.number,
-    address: user.address,
+  let [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    number: '',
+    address: '',
   })
-  function handleChange(e) {
-    setFormData(formData => ({ ...formData, [e.target.id]: e.target.value }))
-  }
 
   useEffect(() => {
+    setFormData({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      number: user.number || '',
+      address: user.address || '',
+    })
     const profileLinks = document.getElementById('links').children
 
     for (let link of profileLinks) {
@@ -25,10 +32,23 @@ function PersonalInfoPage() {
         link.className = ''
       }
     }
-  })
+  }, [user])
+
+  function handleChange(e) {
+    setFormData(formData => ({ ...formData, [e.target.id]: e.target.value }))
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    const updatedUserData = await userServices.updateUser(formData)
+    dispatch(setUser({...updatedUserData}))
+  }
 
   return (
-    <form id='personal-info-form'>
+    <form
+      id='personal-info-form'
+      onSubmit={handleSubmit}
+    >
       <label htmlFor='firstName'>
         first name
         <input
@@ -36,6 +56,7 @@ function PersonalInfoPage() {
           id='firstName'
           value={formData.firstName}
           onChange={handleChange}
+          required
         />
       </label>
       <label htmlFor='lastName'>
@@ -45,6 +66,7 @@ function PersonalInfoPage() {
           id='lastName'
           value={formData.lastName}
           onChange={handleChange}
+          required
         />
       </label>
       <label htmlFor='number'>
@@ -56,15 +78,16 @@ function PersonalInfoPage() {
           onChange={handleChange}
         />
       </label>
-      <label htmlFor='email'>
+      {/* <label htmlFor='email'>
         email address
         <input
           type='email'
           id='email'
           value={formData.email}
           onChange={handleChange}
+          required
         />
-      </label>
+      </label> */}
       <label htmlFor='address'>
         address
         <input
@@ -74,6 +97,7 @@ function PersonalInfoPage() {
           onChange={handleChange}
         />
       </label>
+      <button>Edit</button>
     </form>
   )
 }

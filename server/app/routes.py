@@ -50,7 +50,7 @@ def login():
 
         response = jsonify(
             {'success': True, 'firstName': user.firstName,
-                'lastName': user.lastName, 'email': user.email}
+                'lastName': user.lastName, 'email': user.email, 'number': user.number, 'address': user.address}
         )
 
         set_access_cookies(response, access_token)

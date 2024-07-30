@@ -23,7 +23,6 @@ export const { setCart } = cartSlice.actions
 export const initializeCart = () => {
   return async dispatch => {
     const cart = await cartServices.getCart()
-    console.log(cart)
     dispatch(setCart(cart))
   }
 }

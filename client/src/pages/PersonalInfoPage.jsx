@@ -3,6 +3,7 @@ import '../styles/pages/personal-info-page.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import userServices from '../services/userServices'
 import { setUser } from '../reducers/userReducer'
+import { displayNotification } from '../reducers/notificationReducer'
 
 function PersonalInfoPage() {
   const dispatch = useDispatch()
@@ -41,7 +42,15 @@ function PersonalInfoPage() {
   async function handleSubmit(e) {
     e.preventDefault()
     const updatedUserData = await userServices.updateUser(formData)
-    dispatch(setUser({...updatedUserData}))
+    if (updatedUserData.success) {
+      dispatch(setUser({ ...updatedUserData }))
+      dispatch(
+        displayNotification({
+          type: 'pass',
+          content: 'Your profile has been updated successfully',
+        })
+      )
+    }
   }
 
   return (

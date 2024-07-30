@@ -13,6 +13,7 @@ import { initializeCart } from '../reducers/cartReducer'
 import { setUser } from '../reducers/userReducer'
 import addInterceptor from '../intercept'
 import userServices from '../services/userServices'
+import Notification from '../components/Notification'
 
 export default function Root() {
   const dispatch = useDispatch()
@@ -22,6 +23,8 @@ export default function Root() {
   let userLoggedIn = Object.keys(user).length !== 0
   const rememberMe =
     localStorage.getItem('rememberMe') === 'true' ? true : false
+
+  const notification = useSelector(state => state.notification)
 
   async function rememberUser() {
     if (rememberMe) {
@@ -70,6 +73,12 @@ export default function Root() {
   return (
     <>
       <Navbar />
+      {notification && (
+        <Notification
+          type={notification.type}
+          content={notification.content}
+        />
+      )}
       <div id='detail'>
         <Outlet />
       </div>

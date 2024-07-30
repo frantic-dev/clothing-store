@@ -1,20 +1,21 @@
 #notification {
   position: fixed;
-  top: 50px;
+  top: 10px;
   margin: auto;
   width: 70vw;
   left: calc((30vw - 20px) / 2);
   padding: 20px;
   border-radius: 20px;
-  font-weight: 600;
+  font-weight: 500;
+  z-index: 3;
 }
 .error {
-  background: linear-gradient(
-    0deg,
-    rgb(250, 231, 231) 0%,
-    rgb(255, 199, 199) 100%
-  );
-  color: black;
+  background-color: rgb(255, 199, 199) ;
   border: 2px solid rgb(255, 143, 143);
   border-left: 10px solid rgb(242, 105, 105);
+}
+.pass {
+  background-color: rgb(179, 255, 186);
+  border: 2px solid rgb(108, 255, 83);
+  border-left: 10px solid rgb(2, 133, 0);
 }

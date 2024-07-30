@@ -14,9 +14,9 @@ export const notificationSlice = createSlice({
 
 export const { showNotification } = notificationSlice.actions
 
-export const displayNotification = () => {
+export const displayNotification = (notificationData) => {
   return async dispatch => {
-    dispatch(showNotification(true))
+    dispatch(showNotification({...notificationData}))
     await new Promise(resolve => setTimeout(resolve, 4000))
     dispatch(showNotification(false))
   }

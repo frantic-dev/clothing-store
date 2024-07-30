@@ -4,6 +4,7 @@ import { setWishlist } from './wishlistReducer'
 import { setCart } from './cartReducer'
 import cartServices from '../services/cartServices'
 import wishlistServices from '../services/wishlistServices'
+import { displayNotification } from './notificationReducer'
 
 const initialState = null
 
@@ -35,6 +36,12 @@ export const performPendingAction = action => {
           product_id: action.product_id,
         })
         dispatch(setWishlist(newWishlist))
+        dispatch(
+          displayNotification({
+            type: 'pass',
+            content: 'You have successfully added product to your wishlist',
+          })
+        )
       }
     }
   }
@@ -63,6 +70,12 @@ export const performPendingAction = action => {
 
         dispatch(setWishlist(updatedWishlist))
       }
+      dispatch(
+        displayNotification({
+          type: 'pass',
+          content: 'You have successfully removed product to your wishlist',
+        })
+      )
     }
   }
 
@@ -81,6 +94,19 @@ export const performPendingAction = action => {
           product_id: action.product_id,
         })
         dispatch(setCart(newCart))
+        dispatch(
+          displayNotification({
+            type: 'pass',
+            content: 'You have successfully added product to your cart',
+          })
+        )
+      } else if (cart.includes(action.product_id.toString())) {
+        dispatch(
+          displayNotification({
+            type: 'error',
+            content: 'You already have this item in your cart',
+          })
+        )
       }
     }
   }
@@ -94,9 +120,7 @@ export const performPendingAction = action => {
         dispatch(setCart(newCart))
       } else {
         const cartArray = cart.split(',')
-        const product_index = cartArray.indexOf(
-          action.product_id.toString()
-        )
+        const product_index = cartArray.indexOf(action.product_id.toString())
         cartArray.splice(product_index, 1)
         const newCart = cartArray.join(',')
         const updatedCart = await cartServices.removeFromCart({
@@ -104,6 +128,12 @@ export const performPendingAction = action => {
         })
         dispatch(setCart(updatedCart))
       }
+      dispatch(
+        displayNotification({
+          type: 'pass',
+          content: 'You have successfully removed product to your cart',
+        })
+      )
     }
   }
 }

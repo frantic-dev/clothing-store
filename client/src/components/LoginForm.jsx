@@ -39,15 +39,20 @@ function LoginForm() {
       navigate('/')
       addInterceptor()
     } else {
-      dispatch(displayNotification())
+      dispatch(
+        displayNotification({
+          type: 'error',
+          content: 'Wrong email or password. Try again.',
+        })
+      )
     }
   }
   return (
     <div>
       {notification && (
         <Notification
-          type='error'
-          content='Wrong email or password. Try again.'
+          type={notification.type}
+          content={notification.content}
         />
       )}
       <h2 className='form-title'>Welcome👋</h2>

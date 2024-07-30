@@ -35,7 +35,7 @@ function SignupForm() {
       dispatch(setUser({ ...signup }))
       navigate('/')
     } else {
-      dispatch(displayNotification())
+      dispatch(displayNotification({type: 'error', content: 'an account already exists with that email'}))
     }
   }
 
@@ -43,8 +43,8 @@ function SignupForm() {
     <div>
       {notification && (
         <Notification
-          type='error'
-          content='an account already exists with that email'
+          type={notification.type}
+          content={notification.content}
         />
       )}
       <h2 className='form-title'>create new account</h2>

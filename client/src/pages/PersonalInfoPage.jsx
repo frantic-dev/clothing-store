@@ -5,7 +5,6 @@ function PersonalInfoPage() {
   useEffect(() => {
     const profileLinks = document.getElementById('links').children
     for (let link of profileLinks) {
-      console.log(link.textContent)
       if (link.textContent.includes('personal')) {
         link.className = 'current-profile-link'
       } else {

@@ -14,7 +14,6 @@ function WishlistPage() {
   useEffect(() => {
     const profileLinks = document.getElementById('links').children
     for (let link of profileLinks) {
-      console.log(link)
       if (link.textContent.includes('wishlist')) {
         link.className = 'current-profile-link'
       } else {

@@ -24,9 +24,6 @@ function ProfileNav() {
         <Link to='/profile/orders'>
           <div>my orders</div>
         </Link>
-        <Link to='/profile/addresses'>
-          <div>my addresses</div>
-        </Link>
         <Link to='/profile/settings'>
           <div>settings</div>
         </Link>

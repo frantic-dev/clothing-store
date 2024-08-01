@@ -6,8 +6,12 @@ import HeadphonesImg from './assets/headphones-img.jpg'
 import JewelryImg from './assets/jewelry-img.jpg'
 import BestSeller from './modules/BestSeller'
 import Reviews from './modules/Reviews'
+import { useEffect } from 'react'
 
 function App() {
+  useEffect(() => {
+    window.scrollTo({top:0, behavior: 'instant'})
+  }, [])
   return (
     <div id='home-page'>
       <Hero />

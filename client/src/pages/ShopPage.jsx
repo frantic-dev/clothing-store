@@ -18,6 +18,7 @@ function ShopPage() {
   // reset filters every time you leave page and come back
   useEffect(() => {
     dispatch(resetFilters())
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }, [])
 
   function displayPageProducts(products, currentPage, productsPerPage) {

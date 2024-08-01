@@ -1,11 +1,15 @@
 import { useSelector } from 'react-redux'
 import '../styles/pages/wishlist-page.scss'
 import ProductCard from '../components/ProductCard'
-// import { useEffect } from 'react'
+import { useEffect } from 'react'
 
 function WishlistPage() {
   const wishlist = useSelector(state => state.wishlist)
   const products = useSelector(state => state.products)
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [])
 
   const wishlistProducts = products.filter(product =>
     wishlist.includes(product.id.toString())

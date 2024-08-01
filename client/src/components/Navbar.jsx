@@ -56,7 +56,9 @@ function Navbar() {
         </div>
 
         {userFirstName ? (
-          <span id='username'>{`${userFirstName} ${userLastName}`}</span>
+          <Link to={'/profile/personal'}>
+            <span id='username'>{`${userFirstName} ${userLastName}`}</span>
+          </Link>
         ) : (
           <Link to={'login'}>
             <button>Login</button>
